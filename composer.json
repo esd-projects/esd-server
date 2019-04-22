@@ -1,0 +1,23 @@
+{
+  "require": {
+    "go-swoole/base-server":"dev-master",
+    "go-swoole/console-plugin":"dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "GoSwoole\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "tmtbe",
+      "email": "896369042@qq.com",
+      "homepage": "https://github.com/tmtbe"
+    }
+  ],
+  "name": "go-swoole/go-swoole",
+  "type": "library",
+  "keywords": ["server", "swoole"],
+  "description": "go-swoole",
+  "license": "MIT"
+}
