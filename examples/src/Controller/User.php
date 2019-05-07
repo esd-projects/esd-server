@@ -28,7 +28,7 @@ class User extends GoController
     public function user()
     {
         $this->assertGet();
-        $id = $this->request->getGetRequire("id");
+        $id = $this->getRequest()->getGetRequire("id");
         return $this->userService->getUser($id);
     }
 

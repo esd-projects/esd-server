@@ -17,8 +17,9 @@ abstract class GoController extends EasyController
     /**
      * @throws NoSupportRequestMethodException
      */
-    public function assertGet(){
-        if(strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD))!="get"){
+    public function assertGet()
+    {
+        if (strtolower($this->getRequest()->getServer(Request::SERVER_REQUEST_METHOD)) != "get") {
             throw new NoSupportRequestMethodException();
         }
     }
@@ -26,8 +27,9 @@ abstract class GoController extends EasyController
     /**
      * @throws NoSupportRequestMethodException
      */
-    public function assertPost(){
-        if(strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD))!="post"){
+    public function assertPost()
+    {
+        if (strtolower($this->getRequest()->getServer(Request::SERVER_REQUEST_METHOD)) != "post") {
             throw new NoSupportRequestMethodException();
         }
     }
