@@ -20,6 +20,12 @@ class User extends GoController
      */
     private $userService;
 
+    public function initialization(?string $controllerName, ?string $methodName)
+    {
+        parent::initialization($controllerName, $methodName);
+        $this->getResponse()->addHeader("Content-type", "text/html;charset=UTF-8");
+    }
+
     public function login()
     {
         $session = $this->getSession();
