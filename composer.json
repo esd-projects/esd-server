@@ -1,11 +1,21 @@
 {
   "require": {
-    "go-swoole/base-server":"dev-master",
-    "go-swoole/console-plugin":"dev-master"
+    "go-swoole/base-server":"~0.1",
+    "go-swoole/console-plugin":"~0.1",
+    "go-swoole/easyroute-plugin":"~0.1",
+    "go-swoole/scheduled-plugin":"~0.1",
+    "go-swoole/redis-plugin":"~0.1",
+    "go-swoole/autoreload-plugin":"~0.1",
+    "go-swoole/mysql-plugin":"~0.1",
+    "go-swoole/saber-plugin":"~0.1",
+    "go-swoole/aop-plugin":"~0.1",
+    "go-swoole/actuator-plugin":"~0.1",
+    "go-swoole/whoops-plugin":"~0.1"
   },
   "autoload": {
     "psr-4": {
-      "GoSwoole\\": "src/"
+      "GoSwoole\\": "src/",
+      "GoSwoole\\Examples\\": "examples/src/"
     }
   },
   "authors": [

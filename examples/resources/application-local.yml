@@ -1,0 +1,21 @@
+goswoole:
+  process:
+    task-1:
+      class_name: GoSwoole\Go\GoProcess
+      group_name: TaskGroup
+
+reload:
+  enable: false
+
+
+mysql:
+  default:
+    host: 'mysql-aliyun.dev.svc.cluster.local'
+    username: 'huiyi'
+    password: 'huiyi@123'
+    db: 'huiyi_user'
+    prefix: "t_"
+
+redis:
+  default:
+    host: 'redis-master.dev.svc.cluster.local'

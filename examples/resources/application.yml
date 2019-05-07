@@ -1,0 +1,16 @@
+goswoole:
+  profiles:
+    active: local
+  server:
+    name: demo
+    worker_num: 1
+    max_conn: 1024
+  port:
+    http:
+      name: http
+      host: 0.0.0.0
+      port: 8081
+      open_http_protocol: true
+      sock_type: 1
+      controller_name_space: GoSwoole\Examples\Controller
+      index_controller_name: User
