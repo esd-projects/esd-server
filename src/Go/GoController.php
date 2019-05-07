@@ -11,9 +11,11 @@ namespace GoSwoole\Go;
 
 use GoSwoole\BaseServer\Server\Beans\Request;
 use GoSwoole\Plugins\EasyRoute\Controller\EasyController;
+use GoSwoole\Plugins\Session\GetSession;
 
 abstract class GoController extends EasyController
 {
+    use GetSession;
     /**
      * @throws NoSupportRequestMethodException
      */

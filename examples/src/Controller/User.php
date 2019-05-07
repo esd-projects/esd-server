@@ -20,6 +20,24 @@ class User extends GoController
      */
     private $userService;
 
+    public function login()
+    {
+        $session = $this->getSession();
+        if($session->isAvailable()){
+            return "已登录".$session->getId().$session->getAttribute("test");
+        }else{
+            $session->refresh();
+            $session->setAttribute("test","hello");
+            return "登录".$session->getId().$session->getAttribute("test");
+        }
+    }
+
+    public function logout()
+    {
+        $session = $this->getSession();
+        $session->invalidate();
+        return "注销";
+    }
     /**
      * @return \GoSwoole\Examples\Model\User
      * @throws \GoSwoole\Go\NoSupportRequestMethodException

@@ -5,6 +5,7 @@
     "go-swoole/easyroute-plugin":"~0.1",
     "go-swoole/scheduled-plugin":"~0.1",
     "go-swoole/redis-plugin":"~0.1",
+    "go-swoole/session-plugin":"~0.1",
     "go-swoole/autoreload-plugin":"~0.1",
     "go-swoole/mysql-plugin":"~0.1",
     "go-swoole/saber-plugin":"~0.1",

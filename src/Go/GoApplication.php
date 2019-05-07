@@ -22,6 +22,7 @@ use GoSwoole\Plugins\Mysql\MysqlPlugin;
 use GoSwoole\Plugins\Redis\RedisPlugin;
 use GoSwoole\Plugins\Saber\SaberPlugin;
 use GoSwoole\Plugins\Scheduled\ScheduledPlugin;
+use GoSwoole\Plugins\Session\SessionPlugin;
 use GoSwoole\Plugins\Whoops\WhoopsPlugin;
 
 class GoApplication extends Server
@@ -47,6 +48,7 @@ class GoApplication extends Server
         $this->addPlug(new SaberPlugin());
         $this->addPlug(new ActuatorPlugin());
         $this->addPlug(new WhoopsPlugin());
+        $this->addPlug(new SessionPlugin());
         $this->configure();
         $this->start();
     }
@@ -81,7 +83,7 @@ class GoApplication extends Server
 
     public function onWorkerError(Process $process, int $exit_code, int $signal)
     {
-        // TODO: Implement onWorkerError() method.
+        return;
     }
 
     public function onManagerStart()
