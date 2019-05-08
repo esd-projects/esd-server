@@ -23,6 +23,7 @@ use GoSwoole\Plugins\Mysql\MysqlPlugin;
 use GoSwoole\Plugins\Redis\RedisPlugin;
 use GoSwoole\Plugins\Saber\SaberPlugin;
 use GoSwoole\Plugins\Scheduled\ScheduledPlugin;
+use GoSwoole\Plugins\Security\SecurityPlugin;
 use GoSwoole\Plugins\Session\SessionPlugin;
 use GoSwoole\Plugins\Whoops\WhoopsPlugin;
 
@@ -51,6 +52,7 @@ class GoApplication extends Server
         $this->addPlug(new WhoopsPlugin());
         $this->addPlug(new SessionPlugin());
         $this->addPlug(new CachePlugin());
+        $this->addPlug(new SecurityPlugin());
         $this->configure();
         $this->start();
     }

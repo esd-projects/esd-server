@@ -12,11 +12,13 @@ namespace GoSwoole\Go;
 use DI\Annotation\Inject;
 use GoSwoole\BaseServer\Server\Beans\Request;
 use GoSwoole\Plugins\EasyRoute\Controller\EasyController;
+use GoSwoole\Plugins\Security\GetSecurity;
 use GoSwoole\Plugins\Session\HttpSession;
 use GoSwoole\Plugins\Whoops\WhoopsConfig;
 
 abstract class GoController extends EasyController
 {
+    use GetSecurity;
     /**
      * @Inject()
      * @var HttpSession

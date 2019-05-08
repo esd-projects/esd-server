@@ -11,6 +11,8 @@ namespace GoSwoole\Examples\Controller;
 use DI\Annotation\Inject;
 use GoSwoole\Examples\Service\UserService;
 use GoSwoole\Go\GoController;
+use GoSwoole\Plugins\Security\Annotation\PreAuthorize;
+use GoSwoole\Plugins\Security\Beans\Principal;
 
 class User extends GoController
 {
@@ -28,6 +30,10 @@ class User extends GoController
 
     public function login()
     {
+        $principal = new Principal();
+        $principal->addRole("user");
+        $principal->setUsername("user");
+        $this->setPrincipal($principal);
         if ($this->session->isAvailable()) {
             return "已登录" . $this->session->getId() . $this->session->getAttribute("test");
         } else {
@@ -35,6 +41,7 @@ class User extends GoController
             $this->session->setAttribute("test", "hello");
             return "登录" . $this->session->getId() . $this->session->getAttribute("test");
         }
+
     }
 
     public function logout()
@@ -44,6 +51,7 @@ class User extends GoController
     }
 
     /**
+     * @PreAuthorize(value="hasRole('user')")
      * @return \GoSwoole\Examples\Model\User
      * @throws \GoSwoole\Go\NoSupportRequestMethodException
      * @throws \GoSwoole\BaseServer\Exception

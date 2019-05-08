@@ -12,7 +12,8 @@
     "go-swoole/aop-plugin":"~0.1",
     "go-swoole/actuator-plugin":"~0.1",
     "go-swoole/whoops-plugin":"~0.1",
-    "go-swoole/cache-plugin":"~0.1"
+    "go-swoole/cache-plugin":"~0.1",
+    "go-swoole/security-plugin":"~0.1"
   },
   "autoload": {
     "psr-4": {
