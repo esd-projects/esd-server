@@ -10,19 +10,18 @@ namespace GoSwoole\Examples\Service;
 
 use DI\Annotation\Inject;
 use GoSwoole\Examples\Model\User;
-use GoSwoole\Plugins\Mysql\MysqlPool;
 
 class UserService
 {
     /**
      * @Inject()
-     * @var MysqlPool
+     * @var \MysqliDb
      */
-    private $mysql;
+    private $db;
 
     public function getUser($id)
     {
-        $result = $this->mysql->db()->where("id", $id)->get("user", 1);
+        $result = $this->db->where("id", $id)->get("user", 1);
         if (count($result) > 0) {
             return new User($result[0]);
         } else {

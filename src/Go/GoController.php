@@ -9,19 +9,32 @@
 namespace GoSwoole\Go;
 
 
+use DI\Annotation\Inject;
 use GoSwoole\BaseServer\Server\Beans\Request;
 use GoSwoole\Plugins\EasyRoute\Controller\EasyController;
-use GoSwoole\Plugins\Session\GetSession;
+use GoSwoole\Plugins\Session\HttpSession;
+use GoSwoole\Plugins\Whoops\WhoopsConfig;
 
 abstract class GoController extends EasyController
 {
-    use GetSession;
+    /**
+     * @Inject()
+     * @var HttpSession
+     */
+    protected $session;
+
+    /**
+     * @Inject()
+     * @var WhoopsConfig
+     */
+    protected $whoopsConfig;
+
     /**
      * @throws NoSupportRequestMethodException
      */
     public function assertGet()
     {
-        if (strtolower($this->getRequest()->getServer(Request::SERVER_REQUEST_METHOD)) != "get") {
+        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "get") {
             throw new NoSupportRequestMethodException();
         }
     }
@@ -31,8 +44,16 @@ abstract class GoController extends EasyController
      */
     public function assertPost()
     {
-        if (strtolower($this->getRequest()->getServer(Request::SERVER_REQUEST_METHOD)) != "post") {
+        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "post") {
             throw new NoSupportRequestMethodException();
         }
+    }
+
+    public function onExceptionHandle(\Throwable $e)
+    {
+        if ($this->whoopsConfig->isEnable()) {
+            throw $e;
+        }
+        return parent::onExceptionHandle($e);
     }
 }

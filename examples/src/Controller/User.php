@@ -23,27 +23,26 @@ class User extends GoController
     public function initialization(?string $controllerName, ?string $methodName)
     {
         parent::initialization($controllerName, $methodName);
-        $this->getResponse()->addHeader("Content-type", "text/html;charset=UTF-8");
+        $this->response->addHeader("Content-type", "text/html;charset=UTF-8");
     }
 
     public function login()
     {
-        $session = $this->getSession();
-        if($session->isAvailable()){
-            return "已登录".$session->getId().$session->getAttribute("test");
-        }else{
-            $session->refresh();
-            $session->setAttribute("test","hello");
-            return "登录".$session->getId().$session->getAttribute("test");
+        if ($this->session->isAvailable()) {
+            return "已登录" . $this->session->getId() . $this->session->getAttribute("test");
+        } else {
+            $this->session->refresh();
+            $this->session->setAttribute("test", "hello");
+            return "登录" . $this->session->getId() . $this->session->getAttribute("test");
         }
     }
 
     public function logout()
     {
-        $session = $this->getSession();
-        $session->invalidate();
+        $this->session->invalidate();
         return "注销";
     }
+
     /**
      * @return \GoSwoole\Examples\Model\User
      * @throws \GoSwoole\Go\NoSupportRequestMethodException
@@ -52,7 +51,7 @@ class User extends GoController
     public function user()
     {
         $this->assertGet();
-        $id = $this->getRequest()->getGetRequire("id");
+        $id = $this->request->getGetRequire("id");
         return $this->userService->getUser($id);
     }
 
