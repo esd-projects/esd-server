@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: administrato
+ * User: 白猫
  * Date: 2019/5/7
  * Time: 10:14
  */
@@ -16,6 +16,7 @@ use GoSwoole\BaseServer\Server\Server;
 use GoSwoole\Plugins\Actuator\ActuatorPlugin;
 use GoSwoole\Plugins\Aop\AopPlugin;
 use GoSwoole\Plugins\AutoReload\AutoReloadPlugin;
+use GoSwoole\Plugins\Cache\CachePlugin;
 use GoSwoole\Plugins\Console\ConsolePlugin;
 use GoSwoole\Plugins\EasyRoute\EasyRoutePlugin;
 use GoSwoole\Plugins\Mysql\MysqlPlugin;
@@ -49,6 +50,7 @@ class GoApplication extends Server
         $this->addPlug(new ActuatorPlugin());
         $this->addPlug(new WhoopsPlugin());
         $this->addPlug(new SessionPlugin());
+        $this->addPlug(new CachePlugin());
         $this->configure();
         $this->start();
     }

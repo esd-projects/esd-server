@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: administrato
+ * User: 白猫
  * Date: 2019/5/7
  * Time: 11:35
  */
@@ -11,7 +11,7 @@ namespace GoSwoole\Go;
 
 class GoModel
 {
-    public function __construct($array)
+    public function __construct($array=[])
     {
         $this->buildFromArray($array);
     }
