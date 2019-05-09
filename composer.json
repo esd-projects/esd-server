@@ -13,7 +13,11 @@
     "go-swoole/actuator-plugin":"~0.1",
     "go-swoole/whoops-plugin":"~0.1",
     "go-swoole/cache-plugin":"~0.1",
-    "go-swoole/security-plugin":"~0.1"
+    "go-swoole/security-plugin":"~0.1",
+    "go-swoole/phpunit-plugin":"~0.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
     "psr-4": {

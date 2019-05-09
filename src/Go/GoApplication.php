@@ -20,6 +20,7 @@ use GoSwoole\Plugins\Cache\CachePlugin;
 use GoSwoole\Plugins\Console\ConsolePlugin;
 use GoSwoole\Plugins\EasyRoute\EasyRoutePlugin;
 use GoSwoole\Plugins\Mysql\MysqlPlugin;
+use GoSwoole\Plugins\PHPUnit\PHPUnitPlugin;
 use GoSwoole\Plugins\Redis\RedisPlugin;
 use GoSwoole\Plugins\Saber\SaberPlugin;
 use GoSwoole\Plugins\Scheduled\ScheduledPlugin;
@@ -53,6 +54,7 @@ class GoApplication extends Server
         $this->addPlug(new SessionPlugin());
         $this->addPlug(new CachePlugin());
         $this->addPlug(new SecurityPlugin());
+        $this->addPlug(new PHPUnitPlugin());
         $this->configure();
         $this->start();
     }
