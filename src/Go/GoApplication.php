@@ -14,6 +14,7 @@ use GoSwoole\BaseServer\Server\Plugin\PluginInterface;
 use GoSwoole\BaseServer\Server\Process;
 use GoSwoole\BaseServer\Server\Server;
 use GoSwoole\Plugins\Actuator\ActuatorPlugin;
+use GoSwoole\Plugins\Aop\AopConfig;
 use GoSwoole\Plugins\Aop\AopPlugin;
 use GoSwoole\Plugins\AutoReload\AutoReloadPlugin;
 use GoSwoole\Plugins\Cache\CachePlugin;
@@ -55,6 +56,8 @@ class GoApplication extends Server
         $this->addPlug(new CachePlugin());
         $this->addPlug(new SecurityPlugin());
         $this->addPlug(new PHPUnitPlugin());
+        $aopConfig = new AopConfig(__DIR__);
+        $aopConfig->merge();
         $this->configure();
         $this->start();
     }
