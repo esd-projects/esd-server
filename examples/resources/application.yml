@@ -13,4 +13,4 @@ goswoole:
       open_http_protocol: true
       sock_type: 1
       controller_name_space: GoSwoole\Examples\Controller
-      index_controller_name: User
+      index_controller_name: CUser

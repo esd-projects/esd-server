@@ -9,9 +9,11 @@
 namespace GoSwoole\Examples\Service;
 
 use DI\Annotation\Inject;
+use GoSwoole\BaseServer\Exception;
 use GoSwoole\Examples\Model\User;
 use GoSwoole\Plugins\Cache\Annotation\Cacheable;
 use GoSwoole\Plugins\Cache\Annotation\CacheEvict;
+use GoSwoole\Plugins\Mysql\Annotation\Transactional;
 use Monolog\Logger;
 
 class UserService
@@ -47,11 +49,18 @@ class UserService
 
     /**
      * update操作修改缓存
+     * @Transactional(propagation="NOT_SUPPORTED")
      * @CacheEvict(key="$p[0]->id",namespace="user")
      * @param User $user
+     * @return User|null
+     * @throws Exception
      */
     public function updateUser(User $user)
     {
-        $this->db->update("user",$user->buildToArray());
+        if (empty($user->id)) {
+            throw new Exception("User的id不能为空");
+        }
+        $this->db->where("id", $user->id)->update("user", $user->buildToArray());
+        return $this->getUser($user->id);
     }
 }

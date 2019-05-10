@@ -9,12 +9,13 @@
 namespace GoSwoole\Examples\Controller;
 
 use DI\Annotation\Inject;
+use GoSwoole\Examples\Model\User;
 use GoSwoole\Examples\Service\UserService;
 use GoSwoole\Go\GoController;
 use GoSwoole\Plugins\Security\Annotation\PreAuthorize;
 use GoSwoole\Plugins\Security\Beans\Principal;
 
-class User extends GoController
+class CUser extends GoController
 {
     /**
      * @Inject()
@@ -52,7 +53,7 @@ class User extends GoController
 
     /**
      * @PreAuthorize(value="hasRole('user')")
-     * @return \GoSwoole\Examples\Model\User
+     * @return User
      * @throws \GoSwoole\Go\NoSupportRequestMethodException
      * @throws \GoSwoole\BaseServer\Exception
      */
@@ -61,6 +62,18 @@ class User extends GoController
         $this->assertGet();
         $id = $this->request->getGetRequire("id");
         return $this->userService->getUser($id);
+    }
+
+    /**
+     * @PreAuthorize(value="hasRole('user')")
+     * @return bool
+     * @throws \GoSwoole\Go\NoSupportRequestMethodException
+     * @throws \GoSwoole\BaseServer\Exception
+     */
+    public function updateUser()
+    {
+        $this->assertPost();
+        return $this->userService->updateUser(new User($this->request->getJsonBody()));
     }
 
     /**

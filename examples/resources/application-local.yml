@@ -16,7 +16,7 @@ mysql:
     host: 'mysql-aliyun.dev.svc.cluster.local'
     username: 'huiyi'
     password: 'huiyi@123'
-    db: 'huiyi_user'
+    db: 'huiyi_analysis'
     prefix: "t_"
 
 redis:

@@ -11,7 +11,7 @@ namespace GoSwoole\Go;
 
 class GoModel
 {
-    public function __construct($array=[])
+    public function __construct($array = [])
     {
         $this->buildFromArray($array);
     }
@@ -28,14 +28,16 @@ class GoModel
     }
 
     /**
+     * @param bool $ignoreNull
      * @param bool $changeConnectStyle 转换成“_”连接
      * @return array
      */
-    public function buildToArray($changeConnectStyle = true)
+    public function buildToArray($ignoreNull = true, $changeConnectStyle = true)
     {
         $array = [];
         foreach ($this as $key => $value) {
-            if($changeConnectStyle){
+            if ($ignoreNull && $value == null) continue;
+            if ($changeConnectStyle) {
                 $array[$this->changeConnectStyle($key)] = $value;
             }
         }
