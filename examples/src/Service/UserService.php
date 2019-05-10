@@ -35,16 +35,12 @@ class UserService
      * @Cacheable(key="$p[0]",namespace="user")
      * @param $id
      * @return User|null
+     * @throws Exception
+     * @throws \GoSwoole\Plugins\Mysql\MysqlException
      */
     public function getUser($id)
     {
-        $this->log->debug("获取User:$id");
-        $result = $this->db->where("id", $id)->get("user", 1);
-        if (count($result) > 0) {
-            return new User($result[0]);
-        } else {
-            return null;
-        }
+        return User::select($id);
     }
 
     /**
@@ -57,10 +53,7 @@ class UserService
      */
     public function updateUser(User $user)
     {
-        if (empty($user->id)) {
-            throw new Exception("User的id不能为空");
-        }
-        $this->db->where("id", $user->id)->update("user", $user->buildToArray());
+        $user->updateSelective();
         return $this->getUser($user->id);
     }
 }

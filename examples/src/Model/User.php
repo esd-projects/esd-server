@@ -7,6 +7,7 @@
  */
 
 namespace GoSwoole\Examples\Model;
+
 use GoSwoole\Go\GoModel;
 
 class User extends GoModel
@@ -30,4 +31,31 @@ class User extends GoModel
      * 用户姓名
      */
     public $userName;
+
+    /**
+     * 获取数据库表名
+     * @return string
+     */
+    public static function getTableName(): string
+    {
+        return "user";
+    }
+
+    /**
+     * 获取数据源名
+     * @return string
+     */
+    public static function getDbName(): string
+    {
+        return "default";
+    }
+
+    /**
+     * 获取主键名
+     * @return string
+     */
+    public static function getPrimaryKey(): string
+    {
+        return "id";
+    }
 }

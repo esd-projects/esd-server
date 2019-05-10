@@ -15,9 +15,11 @@ use GoSwoole\Plugins\EasyRoute\Controller\EasyController;
 use GoSwoole\Plugins\Security\GetSecurity;
 use GoSwoole\Plugins\Session\HttpSession;
 use GoSwoole\Plugins\Whoops\WhoopsConfig;
+use Inhere\Validate\ValidationTrait;
 
 abstract class GoController extends EasyController
 {
+    use ValidationTrait;
     use GetSecurity;
     /**
      * @Inject()
