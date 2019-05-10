@@ -66,9 +66,9 @@ class CUser extends GoController
 
     /**
      * @PreAuthorize(value="hasRole('user')")
-     * @return bool
-     * @throws \GoSwoole\Go\NoSupportRequestMethodException
+     * @return User|null
      * @throws \GoSwoole\BaseServer\Exception
+     * @throws \GoSwoole\Go\NoSupportRequestMethodException
      */
     public function updateUser()
     {

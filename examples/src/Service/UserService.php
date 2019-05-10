@@ -49,7 +49,7 @@ class UserService
 
     /**
      * update操作修改缓存
-     * @Transactional(propagation="NOT_SUPPORTED")
+     * @Transactional()
      * @CacheEvict(key="$p[0]->id",namespace="user")
      * @param User $user
      * @return User|null
