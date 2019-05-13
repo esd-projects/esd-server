@@ -1,7 +1,7 @@
-goswoole:
+esd:
   process:
     task-1:
-      class_name: GoSwoole\Go\GoProcess
+      class_name: ESD\Go\GoProcess
       group_name: TaskGroup
 
 reload:
@@ -9,7 +9,7 @@ reload:
 
 aop:
   include_paths:
-    - /mnt/c/Users/administrato/PhpstormProjects/go-swoole/examples/src
+    - /mnt/c/Users/administrato/PhpstormProjects/esd/examples/src
 
 mysql:
   default:

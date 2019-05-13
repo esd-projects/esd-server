@@ -6,36 +6,36 @@
  * Time: 10:14
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
-use GoSwoole\BaseServer\Server\Config\ServerConfig;
-use GoSwoole\BaseServer\Server\Plugin\PluginInterface;
-use GoSwoole\BaseServer\Server\Process;
-use GoSwoole\BaseServer\Server\Server;
-use GoSwoole\Plugins\Actuator\ActuatorPlugin;
-use GoSwoole\Plugins\Aop\AopConfig;
-use GoSwoole\Plugins\Aop\AopPlugin;
-use GoSwoole\Plugins\AutoReload\AutoReloadPlugin;
-use GoSwoole\Plugins\Cache\CachePlugin;
-use GoSwoole\Plugins\Console\ConsolePlugin;
-use GoSwoole\Plugins\EasyRoute\EasyRoutePlugin;
-use GoSwoole\Plugins\Mysql\MysqlPlugin;
-use GoSwoole\Plugins\PHPUnit\PHPUnitPlugin;
-use GoSwoole\Plugins\Redis\RedisPlugin;
-use GoSwoole\Plugins\Saber\SaberPlugin;
-use GoSwoole\Plugins\Scheduled\ScheduledPlugin;
-use GoSwoole\Plugins\Security\SecurityPlugin;
-use GoSwoole\Plugins\Session\SessionPlugin;
-use GoSwoole\Plugins\Whoops\WhoopsPlugin;
+use ESD\BaseServer\Server\Config\ServerConfig;
+use ESD\BaseServer\Server\Plugin\PluginInterface;
+use ESD\BaseServer\Server\Process;
+use ESD\BaseServer\Server\Server;
+use ESD\Plugins\Actuator\ActuatorPlugin;
+use ESD\Plugins\Aop\AopConfig;
+use ESD\Plugins\Aop\AopPlugin;
+use ESD\Plugins\AutoReload\AutoReloadPlugin;
+use ESD\Plugins\Cache\CachePlugin;
+use ESD\Plugins\Console\ConsolePlugin;
+use ESD\Plugins\EasyRoute\EasyRoutePlugin;
+use ESD\Plugins\Mysql\MysqlPlugin;
+use ESD\Plugins\PHPUnit\PHPUnitPlugin;
+use ESD\Plugins\Redis\RedisPlugin;
+use ESD\Plugins\Saber\SaberPlugin;
+use ESD\Plugins\Scheduled\ScheduledPlugin;
+use ESD\Plugins\Security\SecurityPlugin;
+use ESD\Plugins\Session\SessionPlugin;
+use ESD\Plugins\Whoops\WhoopsPlugin;
 
 class GoApplication extends Server
 {
     /**
      * Application constructor.
      * @throws \DI\DependencyException
-     * @throws \GoSwoole\BaseServer\Exception
-     * @throws \GoSwoole\BaseServer\Server\Exception\ConfigException
+     * @throws \ESD\BaseServer\Exception
+     * @throws \ESD\BaseServer\Server\Exception\ConfigException
      * @throws \ReflectionException
      * @throws \Exception
      */
@@ -64,7 +64,7 @@ class GoApplication extends Server
 
     /**
      * @param PluginInterface $plugin
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function addPlug(PluginInterface $plugin)
     {

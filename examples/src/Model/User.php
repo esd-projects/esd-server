@@ -6,9 +6,9 @@
  * Time: 10:50
  */
 
-namespace GoSwoole\Examples\Model;
+namespace ESD\Examples\Model;
 
-use GoSwoole\Go\GoModel;
+use ESD\Go\GoModel;
 
 class User extends GoModel
 {

@@ -6,14 +6,14 @@
  * Time: 10:50
  */
 
-namespace GoSwoole\Examples\Service;
+namespace ESD\Examples\Service;
 
 use DI\Annotation\Inject;
-use GoSwoole\BaseServer\Exception;
-use GoSwoole\Examples\Model\User;
-use GoSwoole\Plugins\Cache\Annotation\Cacheable;
-use GoSwoole\Plugins\Cache\Annotation\CacheEvict;
-use GoSwoole\Plugins\Mysql\Annotation\Transactional;
+use ESD\BaseServer\Exception;
+use ESD\Examples\Model\User;
+use ESD\Plugins\Cache\Annotation\Cacheable;
+use ESD\Plugins\Cache\Annotation\CacheEvict;
+use ESD\Plugins\Mysql\Annotation\Transactional;
 use Monolog\Logger;
 
 class UserService
@@ -36,7 +36,7 @@ class UserService
      * @param $id
      * @return User|null
      * @throws Exception
-     * @throws \GoSwoole\Plugins\Mysql\MysqlException
+     * @throws \ESD\Plugins\Mysql\MysqlException
      */
     public function getUser($id)
     {

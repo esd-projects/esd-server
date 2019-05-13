@@ -6,13 +6,13 @@
  * Time: 17:45
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
-use GoSwoole\BaseServer\Server\Beans\Request;
-use GoSwoole\BaseServer\Server\Beans\Response;
-use GoSwoole\BaseServer\Server\Beans\WebSocketFrame;
-use GoSwoole\BaseServer\Server\ServerPort;
+use ESD\BaseServer\Server\Beans\Request;
+use ESD\BaseServer\Server\Beans\Response;
+use ESD\BaseServer\Server\Beans\WebSocketFrame;
+use ESD\BaseServer\Server\ServerPort;
 
 class GoPort extends ServerPort
 {

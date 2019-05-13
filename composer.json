@@ -1,20 +1,20 @@
 {
   "require": {
-    "go-swoole/base-server":"~0.1",
-    "go-swoole/console-plugin":"~0.1",
-    "go-swoole/easyroute-plugin":"~0.1",
-    "go-swoole/scheduled-plugin":"~0.1",
-    "go-swoole/redis-plugin":"~0.1",
-    "go-swoole/session-plugin":"~0.1",
-    "go-swoole/autoreload-plugin":"~0.1",
-    "go-swoole/mysql-plugin":"~0.1",
-    "go-swoole/saber-plugin":"~0.1",
-    "go-swoole/aop-plugin":"~0.1",
-    "go-swoole/actuator-plugin":"~0.1",
-    "go-swoole/whoops-plugin":"~0.1",
-    "go-swoole/cache-plugin":"~0.1",
-    "go-swoole/security-plugin":"~0.1",
-    "go-swoole/phpunit-plugin":"~0.1",
+    "esd/base-server":"~0.1",
+    "esd/console-plugin":"~0.1",
+    "esd/easyroute-plugin":"~0.1",
+    "esd/scheduled-plugin":"~0.1",
+    "esd/redis-plugin":"~0.1",
+    "esd/session-plugin":"~0.1",
+    "esd/autoreload-plugin":"~0.1",
+    "esd/mysql-plugin":"~0.1",
+    "esd/saber-plugin":"~0.1",
+    "esd/aop-plugin":"~0.1",
+    "esd/actuator-plugin":"~0.1",
+    "esd/whoops-plugin":"~0.1",
+    "esd/cache-plugin":"~0.1",
+    "esd/security-plugin":"~0.1",
+    "esd/phpunit-plugin":"~0.1",
     "inhere/php-validate": "^2.6"
   },
   "require-dev": {
@@ -22,8 +22,8 @@
   },
   "autoload": {
     "psr-4": {
-      "GoSwoole\\": "src/",
-      "GoSwoole\\Examples\\": "examples/src/"
+      "ESD\\": "src/",
+      "ESD\\Examples\\": "examples/src/"
     }
   },
   "authors": [
@@ -33,9 +33,15 @@
       "homepage": "https://github.com/tmtbe"
     }
   ],
-  "name": "go-swoole/go-swoole",
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.laravel-china.org"
+    }
+  },
+  "name": "esd/esd-server",
   "type": "library",
   "keywords": ["server", "swoole"],
-  "description": "go-swoole",
+  "description": "esd",
   "license": "MIT"
 }

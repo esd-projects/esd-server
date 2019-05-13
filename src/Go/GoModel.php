@@ -6,19 +6,19 @@
  * Time: 11:35
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
-use GoSwoole\Plugins\Mysql\GetMysql;
-use GoSwoole\Plugins\Mysql\MysqlException;
-use GoSwoole\Plugins\Mysql\MysqlManyPool;
+use ESD\Plugins\Mysql\GetMysql;
+use ESD\Plugins\Mysql\MysqlException;
+use ESD\Plugins\Mysql\MysqlManyPool;
 use Inhere\Validate\Validation;
 
 /**
  * ORM类，这里约定数据库字段无驼峰且用_连接，Model字段为驼峰
  * 即：user_name(数据库) => userName(Model)
  * Class GoModel
- * @package GoSwoole\Go
+ * @package ESD\Go
  */
 abstract class GoModel extends Validation
 {
@@ -162,7 +162,7 @@ abstract class GoModel extends Validation
     /**
      * 更新数据库
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function update()
     {
@@ -176,7 +176,7 @@ abstract class GoModel extends Validation
     /**
      * 更新数据库排除null
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function updateSelective()
     {
@@ -190,7 +190,7 @@ abstract class GoModel extends Validation
     /**
      * 替换数据库
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function replace()
     {
@@ -204,7 +204,7 @@ abstract class GoModel extends Validation
     /**
      * 替换数据库排除null
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function replaceSelective()
     {
@@ -218,7 +218,7 @@ abstract class GoModel extends Validation
     /**
      * 插入
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function insert()
     {
@@ -230,7 +230,7 @@ abstract class GoModel extends Validation
     /**
      * 插入排除null
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function insertSelective()
     {
@@ -242,7 +242,7 @@ abstract class GoModel extends Validation
     /**
      * 删除
      * @throws ValidateException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function delete()
     {
@@ -257,7 +257,7 @@ abstract class GoModel extends Validation
      * @param $pid
      * @return static|null
      * @throws MysqlException
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public static function select($pid)
     {

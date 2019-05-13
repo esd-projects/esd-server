@@ -1,6 +1,6 @@
 <?php
 
-use GoSwoole\Examples\Application;
+use ESD\Examples\Application;
 
 require __DIR__ . '/../vendor/autoload.php';
 define("ROOT_DIR", __DIR__ . "/..");

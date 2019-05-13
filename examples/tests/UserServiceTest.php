@@ -2,8 +2,8 @@
 
 namespace Test;
 use DI\Annotation\Inject;
-use GoSwoole\Examples\Service\UserService;
-use GoSwoole\Plugins\PHPUnit\GoTestCase;
+use ESD\Examples\Service\UserService;
+use ESD\Plugins\PHPUnit\GoTestCase;
 
 /**
  * Created by PhpStorm.

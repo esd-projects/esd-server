@@ -6,10 +6,10 @@
  * Time: 15:29
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
-use GoSwoole\BaseServer\Exception;
+use ESD\BaseServer\Exception;
 
 class ValidateException extends Exception
 {

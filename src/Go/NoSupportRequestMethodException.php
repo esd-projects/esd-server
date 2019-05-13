@@ -6,10 +6,10 @@
  * Time: 11:08
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
-use GoSwoole\BaseServer\Exception;
+use ESD\BaseServer\Exception;
 
 class NoSupportRequestMethodException extends Exception
 {

@@ -6,15 +6,15 @@
  * Time: 18:28
  */
 
-namespace GoSwoole\Go;
+namespace ESD\Go;
 
 
 use DI\Annotation\Inject;
-use GoSwoole\BaseServer\Server\Beans\Request;
-use GoSwoole\Plugins\EasyRoute\Controller\EasyController;
-use GoSwoole\Plugins\Security\GetSecurity;
-use GoSwoole\Plugins\Session\HttpSession;
-use GoSwoole\Plugins\Whoops\WhoopsConfig;
+use ESD\BaseServer\Server\Beans\Request;
+use ESD\Plugins\EasyRoute\Controller\EasyController;
+use ESD\Plugins\Security\GetSecurity;
+use ESD\Plugins\Session\HttpSession;
+use ESD\Plugins\Whoops\WhoopsConfig;
 use Inhere\Validate\ValidationTrait;
 
 abstract class GoController extends EasyController
