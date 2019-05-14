@@ -44,6 +44,44 @@ abstract class GoController extends EasyController
     }
 
     /**
+     * @param string|null $has
+     * @return bool
+     */
+    public function isGet(string $has = null): bool
+    {
+        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "get") {
+            if(!is_null($has)){
+                if(!is_null($this->request->getGet($has))){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @param string|null $has
+     * @return bool
+     */
+    public function isPost(string $has = null) : bool {
+        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "post") {
+            if(!is_null($has)){
+                if(!is_null($this->request->getPost($has))){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @throws NoSupportRequestMethodException
      */
     public function assertPost()
