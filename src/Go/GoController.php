@@ -17,7 +17,7 @@ use ESD\Plugins\Session\HttpSession;
 use ESD\Plugins\Whoops\WhoopsConfig;
 use Inhere\Validate\ValidationTrait;
 
-abstract class GoController extends EasyController
+class GoController extends EasyController
 {
     use ValidationTrait;
     use GetSecurity;
@@ -59,5 +59,15 @@ abstract class GoController extends EasyController
             throw $e;
         }
         return parent::onExceptionHandle($e);
+    }
+
+    /**
+     * 找不到方法时调用
+     * @param $methodName
+     * @return mixed
+     */
+    protected function defaultMethod(string $methodName)
+    {
+        return "";
     }
 }

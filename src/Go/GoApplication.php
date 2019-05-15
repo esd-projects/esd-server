@@ -22,6 +22,7 @@ use ESD\Plugins\Console\ConsolePlugin;
 use ESD\Plugins\EasyRoute\EasyRoutePlugin;
 use ESD\Plugins\Mysql\MysqlPlugin;
 use ESD\Plugins\PHPUnit\PHPUnitPlugin;
+use ESD\Plugins\ProcessRPC\ProcessRPCPlugin;
 use ESD\Plugins\Redis\RedisPlugin;
 use ESD\Plugins\Saber\SaberPlugin;
 use ESD\Plugins\Scheduled\ScheduledPlugin;
@@ -56,6 +57,7 @@ class GoApplication extends Server
         $this->addPlug(new CachePlugin());
         $this->addPlug(new SecurityPlugin());
         $this->addPlug(new PHPUnitPlugin());
+        $this->addPlug(new ProcessRPCPlugin());
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
         $this->configure();
