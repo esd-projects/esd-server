@@ -66,7 +66,7 @@ class GoController extends EasyController
      * @param $methodName
      * @return mixed
      */
-    protected function defaultMethod(string $methodName)
+    protected function defaultMethod(?string $methodName)
     {
         return "";
     }
