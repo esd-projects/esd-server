@@ -16,7 +16,7 @@
     "esd/security-plugin":"~0.1",
     "esd/phpunit-plugin":"~0.1",
     "esd/process-rpc-plugin":"~0.1",
-    "inhere/php-validate": "^2.6"
+    "esd/php-validate": "^2.6"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.5"

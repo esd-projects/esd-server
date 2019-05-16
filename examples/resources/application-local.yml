@@ -9,7 +9,11 @@ reload:
 
 aop:
   include_paths:
-    - /mnt/c/Users/administrato/PhpstormProjects/esd/examples/src
+    - /mnt/c/Users/administrato/PhpstormProjects/go-swoole/examples/src
+
+scan:
+  include_paths:
+    - /mnt/c/Users/administrato/PhpstormProjects/go-swoole/examples/src
 
 mysql:
   default:

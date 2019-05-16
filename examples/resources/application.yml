@@ -12,6 +12,3 @@ esd:
       port: 8081
       open_http_protocol: true
       sock_type: 1
-      controller_name_space: ESD\Examples\Controller
-      index_controller_name: CUser
-      route_tool: ESD\Plugins\EasyRoute\RouteTool\NormalRoute
