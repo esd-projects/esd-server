@@ -85,7 +85,7 @@ abstract class GoModel extends Validation
     {
         $array = [];
         foreach ($this as $key => $value) {
-            if ($key == "_rules") continue;
+            if ($key == "_rules" || $key == "_scene") continue;
             if (is_array($value) || is_object($value)) continue;
             if ($ignoreNull && $value == null) continue;
             if ($changeConnectStyle) {
