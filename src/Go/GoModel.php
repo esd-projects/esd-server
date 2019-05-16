@@ -12,7 +12,7 @@ namespace ESD\Go;
 use ESD\Plugins\Mysql\GetMysql;
 use ESD\Plugins\Mysql\MysqlException;
 use ESD\Plugins\Mysql\MysqlManyPool;
-use Inhere\Validate\Validation;
+use ESD\Validation\Validation;
 
 /**
  * ORM类，这里约定数据库字段无驼峰且用_连接，Model字段为驼峰
