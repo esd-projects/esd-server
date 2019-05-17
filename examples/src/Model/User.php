@@ -9,10 +9,12 @@
 namespace ESD\Examples\Model;
 
 use ESD\Go\GoModel;
+use ESD\Plugins\Validate\Annotation\Validated;
 
 class User extends GoModel
 {
     /**
+     * @Validated(required=true,integer=true)
      * 用户id
      */
     public $id;
