@@ -20,6 +20,7 @@ class User extends GoModel
     public $id;
 
     /**
+     * @Validated(regexp="/^((0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?)$|^(0?[1][3578][0-9]{9})$|^(400[0-9]{7})$/")
      * 手机号码
      */
     public $mobile;
