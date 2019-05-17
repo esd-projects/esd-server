@@ -42,20 +42,27 @@ class User extends GoModel
     }
 
     /**
-     * 获取数据源名
-     * @return string
-     */
-    public static function getDbName(): string
-    {
-        return "default";
-    }
-
-    /**
      * 获取主键名
      * @return string
      */
     public static function getPrimaryKey(): string
     {
         return "id";
+    }
+
+    public function rules()
+    {
+        return[
+            ['id', 'int'],
+        ];
+    }
+
+    /**
+     * 获取数据源名
+     * @return string
+     */
+    public static function getSelectDb(): string
+    {
+        return "default";
     }
 }
