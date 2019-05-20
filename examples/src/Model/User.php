@@ -9,6 +9,7 @@
 namespace ESD\Examples\Model;
 
 use ESD\Go\GoModel;
+use ESD\Plugins\Validate\Annotation\Filter;
 use ESD\Plugins\Validate\Annotation\Validated;
 
 class User extends GoModel
@@ -26,6 +27,7 @@ class User extends GoModel
     public $mobile;
 
     /**
+     * @Filter(default="test",snakeCase=true)
      * 登陆名称
      */
     public $loginName;
