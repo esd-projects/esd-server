@@ -221,6 +221,7 @@ abstract class GoModel
     {
         $this->_data = $this->buildToArray(true, false);
         //情景验证
+        $this->_data = Filter::filter(static::class, $this->_data);
         Validated::valid(static::class, $this->_data, $this->_roles, $this->_messages, $this->_translates, $type);
     }
 
