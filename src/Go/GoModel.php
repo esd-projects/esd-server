@@ -81,7 +81,6 @@ abstract class GoModel
      */
     public function __construct($array = [])
     {
-        $this->buildFromArray($array);
         $this->_roles = [static::getPrimaryKey(), "required", "on" => "update,replace"];
         $this->_translates = [];
         $this->_messages = [];
@@ -91,6 +90,7 @@ abstract class GoModel
             $this->_reflectionClass = new \ReflectionClass(static::class);
             self::$modelReflectionClass[static::class] = $this->_reflectionClass;
         }
+        $this->buildFromArray($array);
     }
 
     public function setMessages($messages = [])
