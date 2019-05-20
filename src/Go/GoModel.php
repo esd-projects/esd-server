@@ -92,6 +92,13 @@ abstract class GoModel
         }
         $this->buildFromArray($array);
     }
+    /**
+     * @param array $roles
+     */
+    public function setRoles(array $roles): void
+    {
+        $this->_roles = array_merge($this->_roles,$roles);
+    }
 
     public function setMessages($messages = [])
     {
