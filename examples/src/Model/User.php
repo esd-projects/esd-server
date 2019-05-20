@@ -14,7 +14,7 @@ use ESD\Plugins\Validate\Annotation\Validated;
 class User extends GoModel
 {
     /**
-     * @Validated(required=true,integer=true)
+     * @Validated(integer=true)
      * 用户id
      */
     public $id;
@@ -51,21 +51,5 @@ class User extends GoModel
     public static function getPrimaryKey(): string
     {
         return "id";
-    }
-
-    public function rules()
-    {
-        return[
-            ['id', 'int'],
-        ];
-    }
-
-    /**
-     * 获取数据源名
-     * @return string
-     */
-    public static function getSelectDb(): string
-    {
-        return "default";
     }
 }

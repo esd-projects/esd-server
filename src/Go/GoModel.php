@@ -25,6 +25,10 @@ use ESD\Plugins\Validate\ValidationException;
  */
 abstract class GoModel
 {
+    /**
+     * @var \ReflectionClass[]
+     */
+    private static $modelReflectionClass = [];
     const update = "update";
     const insert = "insert";
     const select = "select";
@@ -36,18 +40,30 @@ abstract class GoModel
      * @var array
      */
     private $_data;
+    /**
+     * @var array
+     */
+    private $_messages = [];
+    /**
+     * @var array
+     */
+    private $_roles = [];
+
+    /**
+     * @var array
+     */
+    private $_translates = [];
+
+    /**
+     * @var \ReflectionClass
+     */
+    private $_reflectionClass;
 
     /**
      * 获取数据库表名
      * @return string
      */
     abstract public static function getTableName(): string;
-
-    /**
-     * 获取数据源名
-     * @return string
-     */
-    abstract public static function getSelectDb(): string;
 
     /**
      * 获取主键名
@@ -66,6 +82,25 @@ abstract class GoModel
     public function __construct($array = [])
     {
         $this->buildFromArray($array);
+        $this->_roles = [static::getPrimaryKey(), "required", "on" => "update,replace"];
+        $this->_translates = [];
+        $this->_messages = [];
+        if (isset(self::$modelReflectionClass[static::class])) {
+            $this->_reflectionClass = self::$modelReflectionClass[static::class];
+        } else {
+            $this->_reflectionClass = new \ReflectionClass(static::class);
+            self::$modelReflectionClass[static::class] = $this->_reflectionClass;
+        }
+    }
+
+    public function setMessages($messages = [])
+    {
+        $this->_messages = $messages;
+    }
+
+    public function setTranslates($translates = [])
+    {
+        $this->_translates = $translates;
     }
 
     /**
@@ -88,8 +123,12 @@ abstract class GoModel
         $newArray = Filter::filter(static::class, $newArray);
         Validated::valid(static::class, $newArray);
         //设置值
-        foreach ($this as $key => $value) {
-            $this->$key = $newArray[$key] ?? null;
+        foreach ($this->_reflectionClass->getProperties() as $reflectionProperty) {
+            if ($reflectionProperty->isPublic()) {
+                $key = $reflectionProperty->name;
+                $this->$key = $newArray[$key] ?? null;
+            }
+
         }
         $this->_data = $newArray;
     }
@@ -102,13 +141,19 @@ abstract class GoModel
     public function buildToArray($ignoreNull = true, $changeConnectStyle = true)
     {
         $array = [];
-        foreach ($this as $key => $value) {
-            if ($key == "_data") continue;
-            if (is_array($value) || is_object($value)) continue;
-            if ($ignoreNull && $value == null) continue;
-            if ($changeConnectStyle) {
-                $array[$this->changeConnectStyle($key)] = $value;
+        foreach ($this->_reflectionClass->getProperties() as $reflectionProperty) {
+            if ($reflectionProperty->isPublic()) {
+                $key = $reflectionProperty->name;
+                $value = $this->$key;
+                if (is_array($value) || is_object($value)) continue;
+                if ($ignoreNull && $value == null) continue;
+                if ($changeConnectStyle) {
+                    $array[$this->changeConnectStyle($key)] = $value;
+                } else {
+                    $array[$key] = $value;
+                }
             }
+
         }
         return $array;
     }
@@ -167,136 +212,151 @@ abstract class GoModel
      */
     protected function sqlValidate($type)
     {
-        //默认验证id是否设置
-        $pk = $this->getPrimaryKey();
-        if ($this->$pk == null) throw new ValidationException("主键不能为空");
+        $this->_data = $this->buildToArray(true, false);
         //情景验证
-        Validated::valid(static::class, $this->_data, [], $type);
+        Validated::valid(static::class, $this->_data, $this->_roles, $this->_messages, $this->_translates, $type);
     }
 
     /**
      * 更新数据库
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function update()
+    public function update($selectDb = "default")
     {
         $this->sqlValidate(self::update);
         $data = $this->buildToArray(false);
         $pk = $this->getPrimaryKey();
-        $this->mysql($this::getSelectDb())
+        $this->mysql($selectDb)
             ->where($pk, $data[$pk])
             ->update($this->getTableName(), $data);
     }
 
     /**
      * 更新数据库排除null
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function updateSelective()
+    public function updateSelective($selectDb = "default")
     {
         $this->sqlValidate(self::update);
         $data = $this->buildToArray(true);
         $pk = $this->getPrimaryKey();
-        $this->mysql($this::getSelectDb())
+        $this->mysql($selectDb)
             ->where($pk, $data[$pk])
             ->update($this->getTableName(), $data);
     }
 
     /**
      * 替换数据库
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function replace()
+    public function replace($selectDb = "default")
     {
         $this->sqlValidate(self::replace);
         $data = $this->buildToArray(false);
         $pk = $this->getPrimaryKey();
-        $this->mysql(static::getSelectDb())
+        $this->mysql($selectDb)
             ->where($pk, $data[$pk])
             ->replace($this->getTableName(), $data);
     }
 
     /**
      * 替换数据库排除null
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function replaceSelective()
+    public function replaceSelective($selectDb = "default")
     {
         $this->sqlValidate(self::replace);
         $data = $this->buildToArray(true);
         $pk = $this->getPrimaryKey();
-        $this->mysql(static::getSelectDb())
+        $this->mysql($selectDb)
             ->where($pk, $data[$pk])
             ->replace($this->getTableName(), $data);
     }
 
     /**
      * 插入
+     * @param string $selectDb
+     * @return void
+     * @throws MysqlException
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function insert()
+    public function insert($selectDb = "default")
     {
         $this->sqlValidate(self::insert);
         $data = $this->buildToArray(false);
-        $this->mysql(static::getSelectDb())
+        $id = $this->mysql($selectDb)
             ->insert($this->getTableName(), $data);
+        if ($id === false) {
+            throw new MysqlException($this->mysql($selectDb)->getLastError(),$this->mysql($selectDb)->getLastErrno());
+        }
+        $pk = $this->getPrimaryKey();
+        $this->$pk = $id;
     }
 
     /**
      * 插入排除null
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function insertSelective()
+    public function insertSelective($selectDb = "default")
     {
         $this->sqlValidate(self::insert);
         $data = $this->buildToArray(true);
-        $this->mysql(static::getSelectDb())
+        $id = $this->mysql($selectDb)
             ->insert($this->getTableName(), $data);
+        $pk = $this->getPrimaryKey();
+        $this->$pk = $id;
     }
 
     /**
      * 删除
+     * @param string $selectDb
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public function delete()
+    public function delete($selectDb = "default")
     {
         $this->sqlValidate(self::delete);
         $pk = $this->getPrimaryKey();
-        $this->mysql(static::getSelectDb())
+        $this->mysql($selectDb)
             ->where($pk, $this->$pk)
             ->delete($this->getTableName());
     }
 
     /**
      * @param $pid
+     * @param string $selectDb
      * @return static|null
      * @throws MysqlException
      * @throws ValidationException
@@ -305,10 +365,10 @@ abstract class GoModel
      * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
-    public static function select($pid)
+    public static function select($pid, $selectDb = "default")
     {
         $pk = static::getPrimaryKey();
-        $name = static::getSelectDb();
+        $name = $selectDb;
         $db = getContextValue("MysqliDb:$name");
         if ($db == null) {
             $mysqlPool = getDeepContextValueByClassName(MysqlManyPool::class);

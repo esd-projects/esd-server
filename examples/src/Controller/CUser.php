@@ -14,6 +14,7 @@ use ESD\Examples\Service\UserService;
 use ESD\Go\GoController;
 use ESD\Plugins\EasyRoute\Annotation\GetMapping;
 use ESD\Plugins\EasyRoute\Annotation\PostMapping;
+use ESD\Plugins\EasyRoute\Annotation\RequestBody;
 use ESD\Plugins\EasyRoute\Annotation\RestController;
 use ESD\Plugins\Security\Annotation\PreAuthorize;
 use ESD\Plugins\Security\Beans\Principal;
@@ -71,7 +72,12 @@ class CUser extends GoController
      * @GetMapping("user")
      * @PreAuthorize(value="hasRole('user')")
      * @return User
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
+     * @throws \ESD\Plugins\Mysql\MysqlException
+     * @throws \ESD\Plugins\Validate\ValidationException
+     * @throws \ReflectionException
      */
     public function user()
     {
@@ -83,22 +89,32 @@ class CUser extends GoController
      * @PostMapping("updateUser")
      * @PreAuthorize(value="hasRole('user')")
      * @return User|null
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      * @throws \ESD\BaseServer\Exception
-     * @throws \ESD\Go\NoSupportRequestMethodException
+     * @throws \ESD\Plugins\Mysql\MysqlException
+     * @throws \ESD\Plugins\Validate\ValidationException
+     * @throws \ReflectionException
      */
     public function updateUser()
     {
-        $this->assertPost();
         return $this->userService->updateUser(new User($this->request->getJsonBody()));
     }
 
     /**
-     * 找不到方法时调用
-     * @param $methodName
-     * @return mixed
+     * @PostMapping("insertUser")
+     * @RequestBody("user")
+     * @param User $user
+     * @return User
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ESD\BaseServer\Exception
+     * @throws \ESD\Plugins\Validate\ValidationException
+     * @throws \ReflectionException
      */
-    protected function defaultMethod(?string $methodName)
+    public function insertUser(User $user)
     {
-        return "Hello";
+        $user->insert();
+        return $user;
     }
 }
