@@ -85,7 +85,7 @@ abstract class GoModel
         $this->_roles = [static::getPrimaryKey(), "required", "on" => "update,replace"];
         $this->_translates = [];
         $this->_messages = [];
-        if (isset(self::$modelReflectionClass[static::class])) {
+        if (array_key_exists(static::class, self::$modelReflectionClass) && self::$modelReflectionClass[static::class] != null) {
             $this->_reflectionClass = self::$modelReflectionClass[static::class];
         } else {
             $this->_reflectionClass = new \ReflectionClass(static::class);
@@ -311,7 +311,7 @@ abstract class GoModel
         $id = $this->mysql($selectDb)
             ->insert($this->getTableName(), $data);
         if ($id === false) {
-            throw new MysqlException($this->mysql($selectDb)->getLastError(),$this->mysql($selectDb)->getLastErrno());
+            throw new MysqlException($this->mysql($selectDb)->getLastError(), $this->mysql($selectDb)->getLastErrno());
         }
         $pk = $this->getPrimaryKey();
         $this->$pk = $id;
