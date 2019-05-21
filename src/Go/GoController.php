@@ -14,6 +14,7 @@ use ESD\BaseServer\Server\Beans\Request;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
 use ESD\Plugins\Security\GetSecurity;
 use ESD\Plugins\Session\HttpSession;
+use ESD\Plugins\Uid\GetUid;
 use ESD\Plugins\Whoops\WhoopsConfig;
 use Inhere\Validate\ValidationTrait;
 
@@ -21,6 +22,7 @@ class GoController extends EasyController
 {
     use ValidationTrait;
     use GetSecurity;
+    use GetUid;
     /**
      * @Inject()
      * @var HttpSession

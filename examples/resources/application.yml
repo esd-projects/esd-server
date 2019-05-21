@@ -8,8 +8,13 @@ esd:
     debug: true
   port:
     http:
-      name: http
       host: 0.0.0.0
       port: 8080
       open_http_protocol: true
       sock_type: 1
+    ws:
+      host: 0.0.0.0
+      port: 8081
+      open_websocket_protocol: true
+      sock_type: 1
+      pack_tool: ESD\Plugins\EasyRoute\PackTool\NonJsonPack

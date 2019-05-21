@@ -28,6 +28,7 @@ use ESD\Plugins\Saber\SaberPlugin;
 use ESD\Plugins\Scheduled\ScheduledPlugin;
 use ESD\Plugins\Security\SecurityPlugin;
 use ESD\Plugins\Session\SessionPlugin;
+use ESD\Plugins\Uid\UidPlugin;
 use ESD\Plugins\Whoops\WhoopsPlugin;
 
 class GoApplication extends Server
@@ -58,6 +59,7 @@ class GoApplication extends Server
         $this->addPlug(new SecurityPlugin());
         $this->addPlug(new PHPUnitPlugin());
         $this->addPlug(new ProcessRPCPlugin());
+        $this->addPlug(new UidPlugin());
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
         $this->configure();
