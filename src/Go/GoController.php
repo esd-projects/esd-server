@@ -12,16 +12,16 @@ namespace ESD\Go;
 use DI\Annotation\Inject;
 use ESD\BaseServer\Server\Beans\Request;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
+use ESD\Plugins\EasyRoute\GetBoostSend;
 use ESD\Plugins\Security\GetSecurity;
 use ESD\Plugins\Session\HttpSession;
 use ESD\Plugins\Uid\GetUid;
 use ESD\Plugins\Whoops\WhoopsConfig;
-use Inhere\Validate\ValidationTrait;
 
 class GoController extends EasyController
 {
-    use ValidationTrait;
     use GetSecurity;
+    use GetBoostSend;
     use GetUid;
     /**
      * @Inject()
@@ -52,10 +52,10 @@ class GoController extends EasyController
     public function isGet(string $has = null): bool
     {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "get") {
-            if(!is_null($has)){
-                if(!is_null($this->request->getGet($has))){
+            if (!is_null($has)) {
+                if (!is_null($this->request->getGet($has))) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -69,12 +69,13 @@ class GoController extends EasyController
      * @param string|null $has
      * @return bool
      */
-    public function isPost(string $has = null) : bool {
+    public function isPost(string $has = null): bool
+    {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "post") {
-            if(!is_null($has)){
-                if(!is_null($this->request->getPost($has))){
+            if (!is_null($has)) {
+                if (!is_null($this->request->getPost($has))) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -109,5 +110,20 @@ class GoController extends EasyController
     protected function defaultMethod(?string $methodName)
     {
         return "";
+    }
+
+    /**
+     * 发送给uid
+     * @param $uid
+     * @param $data
+     */
+    protected function sendToUid($uid, $data)
+    {
+        $fd = $this->getUidFd($uid);
+        if ($fd !== false) {
+            $this->autoBoostSend($fd, $data);
+        } else {
+            $this->log->warn("通过uid寻找fd不存在");
+        }
     }
 }

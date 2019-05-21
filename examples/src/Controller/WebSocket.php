@@ -36,4 +36,13 @@ class WebSocket extends GoController
     {
         return $this->getFdUid($this->clientData->getFd());
     }
+
+    /**
+     * @RequestMapping()
+     * @return mixed|null
+     */
+    public function send()
+    {
+        $this->sendToUid("test1","hello");
+    }
 }
