@@ -12,8 +12,7 @@ namespace ESD\Go;
 use ESD\Plugins\Mysql\GetMysql;
 use ESD\Plugins\Mysql\MysqlException;
 use ESD\Plugins\Mysql\MysqlManyPool;
-use ESD\Plugins\Validate\Annotation\Filter;
-use ESD\Plugins\Validate\Annotation\Validated;
+use ESD\Plugins\Validate\Annotation\ValidatedFilter;
 use ESD\Plugins\Validate\ValidationException;
 
 
@@ -92,12 +91,13 @@ abstract class GoModel
         }
         $this->buildFromArray($array);
     }
+
     /**
      * @param array $roles
      */
     public function setRoles(array $roles): void
     {
-        $this->_roles = array_merge($this->_roles,$roles);
+        $this->_roles = array_merge($this->_roles, $roles);
     }
 
     public function setMessages($messages = [])
@@ -127,17 +127,14 @@ abstract class GoModel
             $newArray[$this->changeHumpStyle($key)] = $value;
         }
         //验证
-        $newArray = Filter::filter(static::class, $newArray);
-        Validated::valid(static::class, $newArray);
+        $this->_data = ValidatedFilter::valid(static::class, $newArray, $this->_roles, $this->_messages, $this->_translates);
         //设置值
         foreach ($this->_reflectionClass->getProperties() as $reflectionProperty) {
             if ($reflectionProperty->isPublic()) {
                 $key = $reflectionProperty->name;
-                $this->$key = $newArray[$key] ?? null;
+                $this->$key = $this->_data[$key] ?? null;
             }
-
         }
-        $this->_data = $newArray;
     }
 
     /**
@@ -211,18 +208,26 @@ abstract class GoModel
     }
 
     /**
+     * 刷新data
+     */
+    protected function refreshData()
+    {
+        //重新赋值$this->_data
+        $this->_data = $this->buildToArray(false, false);
+    }
+
+    /**
      * @param $type
-     * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ReflectionException
+     * @throws ValidationException
      */
     protected function sqlValidate($type)
     {
-        $this->_data = $this->buildToArray(false, false);
+        $this->refreshData();
         //情景验证
-        $this->_data = Filter::filter(static::class, $this->_data);
-        Validated::valid(static::class, $this->_data, $this->_roles, $this->_messages, $this->_translates, $type);
+        $this->_data = ValidatedFilter::valid(static::class, $this->_data, $this->_roles, $this->_messages, $this->_translates, $type);
     }
 
     /**

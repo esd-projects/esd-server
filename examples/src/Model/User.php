@@ -27,7 +27,7 @@ class User extends GoModel
     public $mobile;
 
     /**
-     * @Filter(default="test",snakeCase=true)
+     * @Filter(snakeCase=true)
      * 登陆名称
      */
     public $loginName;
