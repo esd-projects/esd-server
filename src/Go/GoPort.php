@@ -56,4 +56,9 @@ class GoPort extends ServerPort
     {
         // TODO: Implement onWs
     }
+
+    public function onWsClose(int $fd, int $reactorId)
+    {
+        // TODO: Implement onWsClose() method.
+    }
 }

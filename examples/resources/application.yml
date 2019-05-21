@@ -5,6 +5,7 @@ esd:
     name: demo
     worker_num: 1
     max_conn: 1024
+    debug: true
   port:
     http:
       name: http
