@@ -12,9 +12,10 @@ namespace ESD\Go;
 use DI\Annotation\Inject;
 use ESD\BaseServer\Server\Beans\Request;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
-use ESD\Plugins\EasyRoute\GetBoostSend;
+use ESD\Plugins\Pack\GetBoostSend;
 use ESD\Plugins\Security\GetSecurity;
 use ESD\Plugins\Session\HttpSession;
+use ESD\Plugins\Topic\GetTopic;
 use ESD\Plugins\Uid\GetUid;
 use ESD\Plugins\Whoops\WhoopsConfig;
 
@@ -23,6 +24,7 @@ class GoController extends EasyController
     use GetSecurity;
     use GetBoostSend;
     use GetUid;
+    use GetTopic;
     /**
      * @Inject()
      * @var HttpSession
@@ -125,5 +127,14 @@ class GoController extends EasyController
         } else {
             $this->log->warn("通过uid寻找fd不存在");
         }
+    }
+
+    /**
+     * 获取自身uid
+     * @return mixed
+     */
+    protected function getUid()
+    {
+        return $this->getFdUid($this->clientData->getFd());
     }
 }

@@ -17,4 +17,3 @@ esd:
       port: 8081
       open_websocket_protocol: true
       sock_type: 1
-      pack_tool: ESD\Plugins\EasyRoute\PackTool\NonJsonPack

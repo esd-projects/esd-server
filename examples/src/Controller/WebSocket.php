@@ -43,6 +43,25 @@ class WebSocket extends GoController
      */
     public function send()
     {
-        $this->sendToUid("test1","hello");
+        $this->sendToUid("test1", "hello");
+    }
+
+    /**
+     * @RequestMapping()
+     * @return mixed|null
+     * @throws \ESD\Plugins\ProcessRPC\ProcessRPCException
+     */
+    public function wsAddSub()
+    {
+        $this->addSub("sub", $this->getUid());
+    }
+
+    /**
+     * @RequestMapping()
+     * @throws \ESD\Plugins\ProcessRPC\ProcessRPCException
+     */
+    public function wsPub()
+    {
+        $this->pub("sub", "sub");
     }
 }
