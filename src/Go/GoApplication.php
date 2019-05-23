@@ -64,6 +64,7 @@ class GoApplication extends Server
         $this->addPlug(new UidPlugin());
         $this->addPlug(new TopicPlugin());
         $this->addPlug(new CsvReaderPlugin());
+        //默认添加Go命名空间的aop
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
         $this->configure();
