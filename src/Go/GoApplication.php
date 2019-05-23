@@ -19,6 +19,7 @@ use ESD\Plugins\Aop\AopPlugin;
 use ESD\Plugins\AutoReload\AutoReloadPlugin;
 use ESD\Plugins\Cache\CachePlugin;
 use ESD\Plugins\Console\ConsolePlugin;
+use ESD\Plugins\CsvReader\CsvReaderPlugin;
 use ESD\Plugins\EasyRoute\EasyRoutePlugin;
 use ESD\Plugins\Mysql\MysqlPlugin;
 use ESD\Plugins\PHPUnit\PHPUnitPlugin;
@@ -62,6 +63,7 @@ class GoApplication extends Server
         $this->addPlug(new ProcessRPCPlugin());
         $this->addPlug(new UidPlugin());
         $this->addPlug(new TopicPlugin());
+        $this->addPlug(new CsvReaderPlugin());
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
         $this->configure();

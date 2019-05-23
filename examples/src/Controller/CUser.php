@@ -9,6 +9,7 @@
 namespace ESD\Examples\Controller;
 
 use DI\Annotation\Inject;
+use ESD\Examples\Model\CsvHelp;
 use ESD\Examples\Model\User;
 use ESD\Examples\Service\UserService;
 use ESD\Go\GoController;
@@ -31,12 +32,6 @@ class CUser extends GoController
      * @var UserService
      */
     private $userService;
-
-    public function initialization(?string $controllerName, ?string $methodName)
-    {
-        parent::initialization($controllerName, $methodName);
-        $this->response->addHeader("Content-type", "text/html;charset=UTF-8");
-    }
 
     /**
      * @GetMapping("login")
