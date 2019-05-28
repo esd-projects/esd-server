@@ -9,10 +9,10 @@
 namespace ESD\Go;
 
 
-use ESD\BaseServer\Server\Config\ServerConfig;
-use ESD\BaseServer\Server\Plugin\PluginInterface;
-use ESD\BaseServer\Server\Process;
-use ESD\BaseServer\Server\Server;
+use ESD\Core\PlugIn\AbstractPlugin;
+use ESD\Core\Plugins\Logger\GetLogger;
+use ESD\Core\Server\Config\ServerConfig;
+use ESD\Core\Server\Process\Process;
 use ESD\Plugins\Actuator\ActuatorPlugin;
 use ESD\Plugins\Aop\AopConfig;
 use ESD\Plugins\Aop\AopPlugin;
@@ -32,14 +32,15 @@ use ESD\Plugins\Session\SessionPlugin;
 use ESD\Plugins\Topic\TopicPlugin;
 use ESD\Plugins\Uid\UidPlugin;
 use ESD\Plugins\Whoops\WhoopsPlugin;
+use ESD\Server\Co\Server;
 
 class GoApplication extends Server
 {
+    use GetLogger;
+
     /**
      * Application constructor.
      * @throws \DI\DependencyException
-     * @throws \ESD\BaseServer\Exception
-     * @throws \ESD\BaseServer\Server\Exception\ConfigException
      * @throws \ReflectionException
      * @throws \Exception
      */
@@ -72,10 +73,10 @@ class GoApplication extends Server
     }
 
     /**
-     * @param PluginInterface $plugin
-     * @throws \ESD\BaseServer\Exception
+     * @param AbstractPlugin $plugin
+     * @throws \ESD\Core\Exception
      */
-    public function addPlug(PluginInterface $plugin)
+    public function addPlug(AbstractPlugin $plugin)
     {
         $this->getPlugManager()->addPlug($plugin);
     }
@@ -83,20 +84,22 @@ class GoApplication extends Server
     /**
      * 所有的配置插件已初始化好
      * @return mixed
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     public function configureReady()
     {
-        $this->log->info("configureReady");
+        $this->info("configureReady");
     }
 
     public function onStart()
     {
-        $this->log->info("onStart");
+        $this->info("onStart");
     }
 
     public function onShutdown()
     {
-        $this->log->info("onShutdown");
+        $this->info("onShutdown");
     }
 
     public function onWorkerError(Process $process, int $exit_code, int $signal)
@@ -106,11 +109,11 @@ class GoApplication extends Server
 
     public function onManagerStart()
     {
-        $this->log->info("onManagerStart");
+        $this->info("onManagerStart");
     }
 
     public function onManagerStop()
     {
-        $this->log->info("onManagerStop");
+        $this->info("onManagerStop");
     }
 }

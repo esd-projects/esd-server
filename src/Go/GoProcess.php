@@ -9,9 +9,9 @@
 namespace ESD\Go;
 
 
-use ESD\BaseServer\Server\Message\Message;
-use ESD\BaseServer\Server\Process;
-use ESD\BaseServer\Server\Server;
+use ESD\Core\Message\Message;
+use ESD\Core\Server\Process\Process;
+use ESD\Server\Co\Server;
 
 class GoProcess extends Process
 {
@@ -19,6 +19,8 @@ class GoProcess extends Process
     /**
      * 在onProcessStart之前，用于初始化成员变量
      * @return mixed
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     public function init()
     {

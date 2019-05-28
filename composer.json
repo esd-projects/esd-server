@@ -1,6 +1,6 @@
 {
   "require": {
-    "esd/base-server":"~0.1",
+    "esd/esd-co-server":"~0.1",
     "esd/console-plugin":"~0.1",
     "esd/easyroute-plugin":"~0.1",
     "esd/scheduled-plugin":"~0.1",

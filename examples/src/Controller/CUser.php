@@ -72,6 +72,7 @@ class CUser extends GoController
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
+     * @throws \ESD\Core\Exception
      */
     public function user()
     {
@@ -89,6 +90,7 @@ class CUser extends GoController
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
+     * @throws \ESD\Core\Exception
      */
     public function updateUser()
     {
@@ -105,6 +107,7 @@ class CUser extends GoController
      * @throws \ESD\BaseServer\Exception
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
+     * @throws \ESD\Plugins\Mysql\MysqlException
      */
     public function insertUser(User $user)
     {

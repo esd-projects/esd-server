@@ -236,8 +236,8 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
+     * @throws MysqlException
      */
     public function update($selectDb = "default")
     {
@@ -255,8 +255,8 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
+     * @throws MysqlException
      */
     public function updateSelective($selectDb = "default")
     {
@@ -274,8 +274,8 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
+     * @throws MysqlException
      */
     public function replace($selectDb = "default")
     {
@@ -293,8 +293,8 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
+     * @throws MysqlException
      */
     public function replaceSelective($selectDb = "default")
     {
@@ -314,7 +314,6 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
     public function insert($selectDb = "default")
@@ -333,10 +332,10 @@ abstract class GoModel
     /**
      * 插入排除null
      * @param string $selectDb
+     * @throws MysqlException
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
     public function insertSelective($selectDb = "default")
@@ -355,8 +354,8 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
+     * @throws MysqlException
      */
     public function delete($selectDb = "default")
     {
@@ -375,7 +374,6 @@ abstract class GoModel
      * @throws ValidationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ReflectionException
      */
     public static function select($pid, $selectDb = "default")

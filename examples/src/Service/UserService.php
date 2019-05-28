@@ -9,7 +9,7 @@
 namespace ESD\Examples\Service;
 
 use DI\Annotation\Inject;
-use ESD\BaseServer\Exception;
+use ESD\Core\Exception;
 use ESD\Examples\Model\User;
 use ESD\Plugins\Cache\Annotation\Cacheable;
 use ESD\Plugins\Cache\Annotation\CacheEvict;

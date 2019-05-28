@@ -9,7 +9,7 @@
 namespace ESD\Go;
 
 
-use ESD\BaseServer\Exception;
+use ESD\Core\Exception;
 
 class NoSupportRequestMethodException extends Exception
 {

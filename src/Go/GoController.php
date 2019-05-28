@@ -10,7 +10,7 @@ namespace ESD\Go;
 
 
 use DI\Annotation\Inject;
-use ESD\BaseServer\Server\Beans\Request;
+use ESD\Core\Server\Beans\Request;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
 use ESD\Plugins\Pack\GetBoostSend;
 use ESD\Plugins\Security\GetSecurity;
