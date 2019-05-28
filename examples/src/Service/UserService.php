@@ -14,7 +14,7 @@ use ESD\Examples\Model\User;
 use ESD\Plugins\Cache\Annotation\Cacheable;
 use ESD\Plugins\Cache\Annotation\CacheEvict;
 use ESD\Plugins\Mysql\Annotation\Transactional;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 class UserService
 {
@@ -26,7 +26,7 @@ class UserService
 
     /**
      * @Inject()
-     * @var Logger
+     * @var LoggerInterface
      */
     private $log;
 

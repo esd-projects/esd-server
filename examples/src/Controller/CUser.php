@@ -12,6 +12,7 @@ use DI\Annotation\Inject;
 use ESD\Examples\Model\User;
 use ESD\Examples\Service\UserService;
 use ESD\Go\GoController;
+use ESD\Plugins\Cache\Annotation\CacheEvict;
 use ESD\Plugins\EasyRoute\Annotation\GetMapping;
 use ESD\Plugins\EasyRoute\Annotation\PostMapping;
 use ESD\Plugins\EasyRoute\Annotation\RequestBody;
@@ -68,7 +69,6 @@ class CUser extends GoController
      * @return User
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
@@ -81,12 +81,19 @@ class CUser extends GoController
     }
 
     /**
+     * @GetMapping()
+     * @CacheEvict(namespace="user",allEntries=true)
+     */
+    public function clearCache()
+    {
+        return "clear";
+    }
+    /**
      * @PostMapping("updateUser")
      * @PreAuthorize(value="hasRole('user')")
      * @return User|null
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
@@ -104,7 +111,6 @@ class CUser extends GoController
      * @return User
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \ESD\BaseServer\Exception
      * @throws \ESD\Plugins\Validate\ValidationException
      * @throws \ReflectionException
      * @throws \ESD\Plugins\Mysql\MysqlException

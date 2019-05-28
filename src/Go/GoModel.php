@@ -80,7 +80,9 @@ abstract class GoModel
      */
     public function __construct($array = [])
     {
-        $this->_roles = [static::getPrimaryKey(), "required", "on" => "update,replace"];
+        $this->_roles = [
+            [static::getPrimaryKey(), "required", "on" => "update,replace"]
+        ];
         $this->_translates = [];
         $this->_messages = [];
         if (array_key_exists(static::class, self::$modelReflectionClass) && self::$modelReflectionClass[static::class] != null) {
