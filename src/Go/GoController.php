@@ -199,6 +199,8 @@ class GoController extends EasyController
             }else if ($e instanceof AlertResponseException){
                 $this->response->setStatus(500);
                 return $this->errorResponse($e->getMessage(), $e->getCode());
+            }else{
+                $this->log->warning($e);
             }
         }
         return parent::onExceptionHandle($e);
