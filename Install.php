@@ -17,6 +17,7 @@ copy_dir(__DIR__ . "/examples/src", $path.'/src');
 copy_dir(__DIR__ . "/examples/resources", $path.'/resources');
 
 updateComposer();
+createBase();
 createIndex();
 createStart();
 
@@ -95,34 +96,51 @@ function updateComposer(){
 }
 
 
-function createIndex(){
+
+function createBase(){
     global $path;
-$tpl = <<<EOF
+    $tpl = <<<EOF
 <?php
 namespace app\Controller;
-use ESD\BaseServer\Plugins\Logger\GetLogger;
 use ESD\Go\GoController;
-use ESD\Plugins\EasyRoute\Annotation\GetMapping;
-use ESD\Plugins\EasyRoute\Annotation\RestController;
+use ESD\Plugins\AnnotationsScan\Annotation\Component;
 use ESD\Plugins\EasyRoute\GetHttp;
 use ESD\Plugins\Mysql\GetMysql;
 use ESD\Plugins\Redis\GetRedis;
 use ESD\Plugins\Session\GetSession;
 
+/**
+ * @Component()
+ * Class Base
+ * @package app\Controller
+ */
+class Base extends GoController
+{
+    use GetSession;
+    use GetRedis;
+    use GetHttp;
+    use GetMysql;
+}
+EOF;
+    file_put_contents($path.'/src/Controller/Base.php', $tpl);
+
+}
+
+function createIndex(){
+    global $path;
+$tpl = <<<EOF
+<?php
+namespace app\Controller;
+use ESD\Plugins\EasyRoute\Annotation\GetMapping;
+use ESD\Plugins\EasyRoute\Annotation\RestController;
 
 /**
  * @RestController()
- * Class TestController
+ * Class Index
  * @package ESD\Plugins\EasyRoute
  */
-class Index extends GoController
+class Index extends Base
 {
-    use GetLogger;
-    use GetMysql;
-    use GetRedis;
-    use GetSession;
-    use GetHttp;
-
 
     /**
      * @GetMapping("/")
@@ -130,9 +148,8 @@ class Index extends GoController
      */
     public function index()
     {
-        return 'hello';
+        return 'hello world';
     }
-
 }
 EOF;
 file_put_contents($path.'/src/Controller/Index.php', $tpl);
