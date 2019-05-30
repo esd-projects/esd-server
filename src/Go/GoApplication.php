@@ -20,7 +20,9 @@ use ESD\Plugins\AutoReload\AutoReloadPlugin;
 use ESD\Plugins\Cache\CachePlugin;
 use ESD\Plugins\Console\ConsolePlugin;
 use ESD\Plugins\CsvReader\CsvReaderPlugin;
+use ESD\Plugins\EasyRoute\EasyRouteConfig;
 use ESD\Plugins\EasyRoute\EasyRoutePlugin;
+use ESD\Plugins\EasyRoute\RouteConfig;
 use ESD\Plugins\Mysql\MysqlPlugin;
 use ESD\Plugins\PHPUnit\PHPUnitPlugin;
 use ESD\Plugins\ProcessRPC\ProcessRPCPlugin;
@@ -33,6 +35,7 @@ use ESD\Plugins\Topic\TopicPlugin;
 use ESD\Plugins\Uid\UidPlugin;
 use ESD\Plugins\Whoops\WhoopsPlugin;
 use ESD\Server\Co\Server;
+use ESD\Go\NormalErrorController;
 
 class GoApplication extends Server
 {
@@ -41,13 +44,17 @@ class GoApplication extends Server
     /**
      * Application constructor.
      * @throws \DI\DependencyException
+     * @throws \ReflectionException
      * @throws \Exception
      */
     public function __construct()
     {
         parent::__construct(new ServerConfig(), GoPort::class, GoProcess::class);
         $this->addPlug(new ConsolePlugin());
-        $this->addPlug(new EasyRoutePlugin());
+
+        $routeConfig = new RouteConfig();
+        $routeConfig->setErrorControllerName(GoController::class);
+        $this->addPlug(new EasyRoutePlugin($routeConfig));
         $this->addPlug(new ScheduledPlugin());
         $this->addPlug(new RedisPlugin());
         $this->addPlug(new MysqlPlugin());
@@ -80,9 +87,10 @@ class GoApplication extends Server
         $this->getPlugManager()->addPlug($plugin);
     }
 
+
     /**
      * 所有的配置插件已初始化好
-     * @return mixed
+     * @return mixed|void
      */
     public function configureReady()
     {
