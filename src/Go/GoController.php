@@ -105,7 +105,7 @@ class GoController extends EasyController
 
     public function isAjax(): bool
     {
-        if($this->request->getHeader('x-requested-with') == 'xmlhttprequest'){
+        if($this->request->getHeaderLine('x-requested-with') == 'xmlhttprequest'){
             return true;
         }else{
             return false;
@@ -126,7 +126,7 @@ class GoController extends EasyController
     public function successResponse($data, $url = null, $wait = 3, array $header = []){
 
         if(is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null){
-            $url = $$this->request->getServer(Request::HEADER_REFERER);
+            $url = $this->request->getServer(Request::HEADER_REFERER);
         }else{
             $url = '/';
         }
