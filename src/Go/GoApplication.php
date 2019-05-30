@@ -20,7 +20,6 @@ use ESD\Plugins\AutoReload\AutoReloadPlugin;
 use ESD\Plugins\Cache\CachePlugin;
 use ESD\Plugins\Console\ConsolePlugin;
 use ESD\Plugins\CsvReader\CsvReaderPlugin;
-use ESD\Plugins\EasyRoute\EasyRouteConfig;
 use ESD\Plugins\EasyRoute\EasyRoutePlugin;
 use ESD\Plugins\EasyRoute\RouteConfig;
 use ESD\Plugins\Mysql\MysqlPlugin;
@@ -35,7 +34,6 @@ use ESD\Plugins\Topic\TopicPlugin;
 use ESD\Plugins\Uid\UidPlugin;
 use ESD\Plugins\Whoops\WhoopsPlugin;
 use ESD\Server\Co\Server;
-use ESD\Go\NormalErrorController;
 
 class GoApplication extends Server
 {
