@@ -36,11 +36,8 @@ class UserService
      * @param $id
      * @return User|null
      * @throws Exception
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      */
     public function getUser($id)
     {
@@ -54,11 +51,8 @@ class UserService
      * @param User $user
      * @return User|null
      * @throws Exception
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      */
     public function updateUser(User $user)
     {

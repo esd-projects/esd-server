@@ -73,10 +73,7 @@ abstract class GoModel
     /**
      * GoModel constructor.
      * @param array $array
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      */
     public function __construct($array = [])
     {
@@ -115,10 +112,7 @@ abstract class GoModel
     /**
      * 将会自动在驼峰和"_"连接中寻找存在
      * @param array $array
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      */
     public function buildFromArray(array $array)
     {
@@ -220,9 +214,6 @@ abstract class GoModel
 
     /**
      * @param $type
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws ValidationException
      */
     protected function sqlValidate($type)
@@ -236,9 +227,6 @@ abstract class GoModel
      * 更新数据库
      * @param string $selectDb
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws MysqlException
      */
     public function update($selectDb = "default")
@@ -255,9 +243,6 @@ abstract class GoModel
      * 更新数据库排除null
      * @param string $selectDb
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws MysqlException
      */
     public function updateSelective($selectDb = "default")
@@ -274,9 +259,6 @@ abstract class GoModel
      * 替换数据库
      * @param string $selectDb
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws MysqlException
      */
     public function replace($selectDb = "default")
@@ -293,9 +275,6 @@ abstract class GoModel
      * 替换数据库排除null
      * @param string $selectDb
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws MysqlException
      */
     public function replaceSelective($selectDb = "default")
@@ -314,9 +293,6 @@ abstract class GoModel
      * @return void
      * @throws MysqlException
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      */
     public function insert($selectDb = "default")
     {
@@ -336,9 +312,6 @@ abstract class GoModel
      * @param string $selectDb
      * @throws MysqlException
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      */
     public function insertSelective($selectDb = "default")
     {
@@ -354,9 +327,6 @@ abstract class GoModel
      * 删除
      * @param string $selectDb
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws MysqlException
      */
     public function delete($selectDb = "default")
@@ -374,9 +344,6 @@ abstract class GoModel
      * @return static|null
      * @throws MysqlException
      * @throws ValidationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      */
     public static function select($pid, $selectDb = "default")
     {

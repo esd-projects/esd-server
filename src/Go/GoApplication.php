@@ -41,7 +41,6 @@ class GoApplication extends Server
     /**
      * Application constructor.
      * @throws \DI\DependencyException
-     * @throws \ReflectionException
      * @throws \Exception
      */
     public function __construct()
@@ -84,8 +83,6 @@ class GoApplication extends Server
     /**
      * 所有的配置插件已初始化好
      * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      */
     public function configureReady()
     {

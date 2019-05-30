@@ -19,8 +19,7 @@ class GoProcess extends Process
     /**
      * 在onProcessStart之前，用于初始化成员变量
      * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+
      */
     public function init()
     {

@@ -67,11 +67,8 @@ class CUser extends GoController
      * @GetMapping("user")
      * @PreAuthorize(value="hasRole('user')")
      * @return User
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      * @throws \ESD\Core\Exception
      */
     public function user()
@@ -88,15 +85,13 @@ class CUser extends GoController
     {
         return "clear";
     }
+
     /**
      * @PostMapping("updateUser")
      * @PreAuthorize(value="hasRole('user')")
      * @return User|null
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Mysql\MysqlException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      * @throws \ESD\Core\Exception
      */
     public function updateUser()
@@ -109,10 +104,7 @@ class CUser extends GoController
      * @RequestBody("user")
      * @param User $user
      * @return User
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\Validate\ValidationException
-     * @throws \ReflectionException
      * @throws \ESD\Plugins\Mysql\MysqlException
      */
     public function insertUser(User $user)

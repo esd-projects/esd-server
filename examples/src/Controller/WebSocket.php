@@ -22,8 +22,6 @@ class WebSocket extends GoController
     /**
      * RequestMapping()
      * @return string
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      */
     public function wsBindUid()
     {
@@ -34,8 +32,6 @@ class WebSocket extends GoController
     /**
      * @RequestMapping()
      * @return mixed|null
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      */
     public function wsGetUid()
     {
@@ -52,8 +48,6 @@ class WebSocket extends GoController
 
     /**
      * @RequestMapping()
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\ProcessRPC\ProcessRPCException
      */
     public function wsAddSub()
@@ -63,8 +57,6 @@ class WebSocket extends GoController
 
     /**
      * @RequestMapping()
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      * @throws \ESD\Plugins\ProcessRPC\ProcessRPCException
      */
     public function wsPub()

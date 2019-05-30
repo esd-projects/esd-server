@@ -12,6 +12,7 @@ namespace ESD\Go;
 use DI\Annotation\Inject;
 use ESD\Core\Server\Beans\Request;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
+use ESD\Plugins\EasyRoute\MethodNotAllowedException;
 use ESD\Plugins\Pack\GetBoostSend;
 use ESD\Plugins\Security\GetSecurity;
 use ESD\Plugins\Session\HttpSession;
@@ -38,12 +39,12 @@ class GoController extends EasyController
     protected $whoopsConfig;
 
     /**
-     * @throws NoSupportRequestMethodException
+     * @throws MethodNotAllowedException
      */
     public function assertGet()
     {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "get") {
-            throw new NoSupportRequestMethodException();
+            throw new MethodNotAllowedException();
         }
     }
 
@@ -87,12 +88,12 @@ class GoController extends EasyController
     }
 
     /**
-     * @throws NoSupportRequestMethodException
+     * @throws MethodNotAllowedException
      */
     public function assertPost()
     {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "post") {
-            throw new NoSupportRequestMethodException();
+            throw new MethodNotAllowedException ();
         }
     }
 
