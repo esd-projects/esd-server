@@ -3,6 +3,7 @@
     "esd/esd-co-server":"~0.1",
     "esd/console-plugin":"~0.1",
     "esd/easyroute-plugin":"~0.1",
+    "esd/annotations-scan-plugin":"~0.1",
     "esd/scheduled-plugin":"~0.1",
     "esd/redis-plugin":"~0.1",
     "esd/session-plugin":"~0.1",
