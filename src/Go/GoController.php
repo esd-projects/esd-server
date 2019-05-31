@@ -72,7 +72,7 @@ class GoController extends EasyController
     {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "get") {
             if (!is_null($has)) {
-                if (!is_null($this->request->getGet($has))) {
+                if (!is_null($this->request->query($has))) {
                     return true;
                 } else {
                     return false;
@@ -92,7 +92,7 @@ class GoController extends EasyController
     {
         if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "post") {
             if (!is_null($has)) {
-                if (!is_null($this->request->getPost($has))) {
+                if (!is_null($this->request->post($has))) {
                     return true;
                 } else {
                     return false;
@@ -105,7 +105,7 @@ class GoController extends EasyController
 
     public function isAjax(): bool
     {
-        if($this->request->getHeader('x-requested-with') == 'xmlhttprequest'){
+        if($this->request->getHeaderLine('x-requested-with') == 'xmlhttprequest'){
             return true;
         }else{
             return false;
@@ -124,22 +124,23 @@ class GoController extends EasyController
      * @return string
      */
     public function successResponse($data, $url = null, $wait = 3, array $header = []){
-        if(is_null($url) && isset($this->request->server[Request::HEADER_REFERER])){
-            $url = $this->request->server[Request::HEADER_REFERER];
+
+        if(is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null){
+            $url = $this->request->getServer(Request::HEADER_REFERER);
         }else{
             $url = '/';
         }
 
         if(is_array($data)){
             if(empty($header)){
-                $this->response->setHeader(['Content-type' => 'application/json']);
+                $this->response->withHeader('Content-type', 'application/json');
             }else{
-                $this->response->setHeader($header);
+                $this->response->withHeaders($header);
             }
             return json_encode(['data' => $data, 'code'=> 0]);
         }else{
             if(!empty($header)){
-                $this->response->setHeader($header);
+                $this->response->withHeaders($header);
             }
             return $this->msg('系统消息', $data, $wait, $url);
         }
@@ -148,22 +149,22 @@ class GoController extends EasyController
 
     public function errorResponse($msg = '', $code = 500, $url = null, $wait = 3, array $header = []){
 
-        if(is_null($url) && isset($this->request->server[Request::HEADER_REFERER])){
-            $url = $this->request->server[Request::HEADER_REFERER];
+        if(is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null){
+            $url = $$this->request->getServer(Request::HEADER_REFERER);
         }else{
             $url = '/';
         }
 
         if($this->isAjax()){
             if(empty($header)){
-                $this->response->setHeader(['Content-type' => 'application/json']);
+                $this->response->withHeader('Content-type', 'application/json');
             }else{
-                $this->response->setHeader($header);
+                $this->response->withHeaders($header);
             }
             return json_encode(['code'=> $code, 'msg' => $msg, 'data' => null]);
         }else{
             if(!empty($header)){
-                $this->response->setHeader($header);
+                $this->response->withHeaders($header);
             }
             return $this->msg('错误消息', $msg, $wait, $url);
         }
@@ -183,21 +184,21 @@ class GoController extends EasyController
         }
 
         if ($this->clientData->getResponse() != null) {
-            $this->response->setStatus(404);
-            $this->response->addHeader("Content-Type", "text/html;charset=UTF-8");
+            $this->response->withStatus(404);
+            $this->response->withHeader("Content-Type", "text/html;charset=UTF-8");
             if($e instanceof RouteException) {
                 $msg = '404 Not found / ' . $e->getMessage();
                 return $msg;
 
             }else if ($e instanceof AccessDeniedException) {
-                $this->response->setStatus(401);
+                $this->response->withStatus(401);
                 $msg = '401 Access denied / ' . $e->getMessage();
                 return $msg;
             }else if($e instanceof ResponseException){
-                $this->response->setStatus(200);
+                $this->response->withStatus(200);
                 return $this->errorResponse($e->getMessage(), $e->getCode());
             }else if ($e instanceof AlertResponseException){
-                $this->response->setStatus(500);
+                $this->response->withStatus(500);
                 return $this->errorResponse($e->getMessage(), $e->getCode());
             }else{
                 $this->log->warning($e);
