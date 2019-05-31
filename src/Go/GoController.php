@@ -105,7 +105,7 @@ class GoController extends EasyController
 
     public function isAjax(): bool
     {
-        if($this->request->getHeaderLine('x-requested-with') == 'xmlhttprequest'){
+        if(strtolower($this->request->getHeaderLine('x-requested-with')) == 'xmlhttprequest'){
             return true;
         }else{
             return false;
