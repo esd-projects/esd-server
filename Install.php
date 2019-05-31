@@ -108,6 +108,8 @@ use ESD\Plugins\EasyRoute\GetHttp;
 use ESD\Plugins\Mysql\GetMysql;
 use ESD\Plugins\Redis\GetRedis;
 use ESD\Plugins\Session\GetSession;
+use ESD\Plugins\Cache\GetCache;
+
 
 /**
  * @Component()
@@ -120,6 +122,7 @@ class Base extends GoController
     use GetRedis;
     use GetHttp;
     use GetMysql;
+    use GetCache;
 }
 EOF;
     file_put_contents($path.'/src/Controller/Base.php', $tpl);
