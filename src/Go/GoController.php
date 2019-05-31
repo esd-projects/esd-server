@@ -49,7 +49,7 @@ class GoController extends EasyController
      */
     public function assertGet()
     {
-        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "get") {
+        if (strtolower($this->request->getMethod()) != "get") {
             throw new MethodNotAllowedException();
         }
     }
@@ -59,7 +59,7 @@ class GoController extends EasyController
      */
     public function assertPost()
     {
-        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) != "post") {
+        if (strtolower($this->request->getMethod()) != "post") {
             throw new MethodNotAllowedException();
         }
     }
@@ -70,7 +70,7 @@ class GoController extends EasyController
      */
     public function isGet(string $has = null): bool
     {
-        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "get") {
+        if (strtolower($this->request->getMethod()) == "get") {
             if (!is_null($has)) {
                 if (!is_null($this->request->query($has))) {
                     return true;
@@ -90,7 +90,7 @@ class GoController extends EasyController
      */
     public function isPost(string $has = null): bool
     {
-        if (strtolower($this->request->getServer(Request::SERVER_REQUEST_METHOD)) == "post") {
+        if (strtolower($this->request->getMethod()) == "post") {
             if (!is_null($has)) {
                 if (!is_null($this->request->post($has))) {
                     return true;
