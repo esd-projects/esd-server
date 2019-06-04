@@ -12,8 +12,11 @@ use ESD\Core\Plugins\Logger\GetLogger;
 class ResponseException extends \Exception{
 
     use GetLogger;
-    function __construct($message = "请求失败，请稍后再试", $code = 200, \Throwable $previous = null)
+    function __construct($message = null, $code = 200, \Throwable $previous = null)
     {
+        if(is_null($message)){
+            $message = "请求失败，请稍后再试";
+        }
         $this->warn($message);
 
         return parent::__construct($message, $code, $previous);
