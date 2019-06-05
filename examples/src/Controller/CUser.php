@@ -90,7 +90,7 @@ class CUser extends GoController
      */
     public function user()
     {
-        $id = $this->request->getGetRequire("id");
+        $id = $this->request->query("id");
         return $this->userService->getUser($id);
     }
 
@@ -113,7 +113,8 @@ class CUser extends GoController
      */
     public function updateUser()
     {
-        return $this->userService->updateUser(new User($this->request->getJsonBody()));
+        $data = json_decode($this->request->getBody()->getContents(), true);
+        return $this->userService->updateUser(new User($data));
     }
 
     /**

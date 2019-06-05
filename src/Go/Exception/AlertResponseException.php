@@ -12,8 +12,11 @@ use ESD\Core\Plugins\Logger\GetLogger;
 class AlertResponseException extends \Exception{
 
     use GetLogger;
-    function __construct($message = "内部服务器错误，请稍后再试", $code = 500, \Throwable $previous = null)
+    function __construct($message = null, $code = 500, \Throwable $previous = null)
     {
+        if(is_null($message)){
+            $message = "内部服务器错误，请稍后再试";
+        }
         $this->alert($message);
         $this->alert($this);
         return parent::__construct($message, $code, $previous);
