@@ -14,6 +14,7 @@ use ESD\Plugins\Mysql\MysqlException;
 use ESD\Plugins\Mysql\MysqlManyPool;
 use ESD\Plugins\Validate\Annotation\ValidatedFilter;
 use ESD\Plugins\Validate\ValidationException;
+use ESD\Psr\Tracing\TracingInterface;
 
 
 /**
@@ -22,7 +23,7 @@ use ESD\Plugins\Validate\ValidationException;
  * Class GoModel
  * @package ESD\Go
  */
-abstract class GoModel
+abstract class GoModel implements TracingInterface
 {
     /**
      * @var \ReflectionClass[]

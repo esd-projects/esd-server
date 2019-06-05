@@ -14,9 +14,10 @@ use ESD\Examples\Model\User;
 use ESD\Plugins\Cache\Annotation\Cacheable;
 use ESD\Plugins\Cache\Annotation\CacheEvict;
 use ESD\Plugins\Mysql\Annotation\Transactional;
+use ESD\Psr\Tracing\TracingInterface;
 use Psr\Log\LoggerInterface;
 
-class UserService
+class UserService implements TracingInterface
 {
     /**
      * @Inject()

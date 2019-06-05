@@ -9,6 +9,7 @@
 namespace ESD\Examples\Controller;
 
 use DI\Annotation\Inject;
+use ESD\Core\Exception;
 use ESD\Examples\Model\User;
 use ESD\Examples\Service\UserService;
 use ESD\Go\GoController;
@@ -34,6 +35,14 @@ class CUser extends GoController
     private $userService;
 
     /**
+     * @GetMapping()
+     * @throws Exception
+     */
+    public function ex()
+    {
+        throw new Exception("ex");
+    }
+    /**
      * @GetMapping("login")
      * @return string
      */
@@ -52,7 +61,15 @@ class CUser extends GoController
         }
 
     }
-
+    /**
+     * @GetMapping("hello")
+     * @return string
+     */
+    public function hello()
+    {
+        $this->log->debug("hello");
+        return "hello2";
+    }
     /**
      * @GetMapping("logout")
      * @return string
@@ -111,5 +128,11 @@ class CUser extends GoController
     {
         $user->insert();
         return $user;
+    }
+
+    public function onExceptionHandle(\Throwable $e)
+    {
+        var_dump($e->getMessage());
+        return parent::onExceptionHandle($e);
     }
 }
