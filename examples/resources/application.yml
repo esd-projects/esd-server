@@ -2,7 +2,7 @@ esd:
   profiles:
     active: local
   server:
-    name: demo
+    name: esd-server
     worker_num: 4
     max_conn: 1024
     debug: true

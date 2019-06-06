@@ -15,10 +15,7 @@ if (count($argv) < 2 || $argv[1] != '-y') {
 }
 copy_dir(__DIR__ . "/examples/src", $path.'/src');
 copy_dir(__DIR__ . "/examples/resources", $path.'/resources');
-
 updateComposer();
-createBase();
-createIndex();
 createStart();
 
 
@@ -39,11 +36,11 @@ function copy_dir($src, $dst, $force = false)
     $dir = opendir($src);
     if(!$dir) {
         print_r("$src 权限问题或目录不合法，安装错误\n");
-        return;
+        return false;
     }
     if (file_exists($dst) && $force == false) {
         print_r("$dst 目录已存在（跳过）\n");
-        return;
+        return false;
     }
     @mkdir($dst);
     while (false !== ($file = readdir($dir))) {
@@ -53,13 +50,16 @@ function copy_dir($src, $dst, $force = false)
                 continue;
             } else {
                 copy($src . '/' . $file, $dst . '/' . $file);
+                $content = file_get_contents($dst . '/' . $file);
+                $content = str_replace('namespace ESD\Examples', 'namespace app', $content);
+                file_put_contents($dst . '/' . $file, $content);
             }
         }
     }
     closedir($dir);
     print_r("已创建$dst 目录\n");
+    return true;
 }
-
 
 function createStart(){
     global $path;
@@ -95,65 +95,3 @@ function updateComposer(){
     file_put_contents($path .'/composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 }
 
-
-
-function createBase(){
-    global $path;
-    $tpl = <<<EOF
-<?php
-namespace app\Controller;
-use ESD\Go\GoController;
-use ESD\Plugins\AnnotationsScan\Annotation\Component;
-use ESD\Plugins\EasyRoute\GetHttp;
-use ESD\Plugins\Mysql\GetMysql;
-use ESD\Plugins\Redis\GetRedis;
-use ESD\Plugins\Session\GetSession;
-use ESD\Plugins\Cache\GetCache;
-
-
-/**
- * @Component()
- * Class Base
- * @package app\Controller
- */
-class Base extends GoController
-{
-    use GetSession;
-    use GetRedis;
-    use GetHttp;
-    use GetMysql;
-    use GetCache;
-}
-EOF;
-    file_put_contents($path.'/src/Controller/Base.php', $tpl);
-
-}
-
-function createIndex(){
-    global $path;
-$tpl = <<<EOF
-<?php
-namespace app\Controller;
-use ESD\Plugins\EasyRoute\Annotation\GetMapping;
-use ESD\Plugins\EasyRoute\Annotation\RestController;
-
-/**
- * @RestController()
- * Class Index
- * @package ESD\Plugins\EasyRoute
- */
-class Index extends Base
-{
-
-    /**
-     * @GetMapping("/")
-     * @return string
-     */
-    public function index()
-    {
-        return 'hello world';
-    }
-}
-EOF;
-file_put_contents($path.'/src/Controller/Index.php', $tpl);
-}
