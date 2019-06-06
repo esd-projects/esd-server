@@ -179,10 +179,6 @@ class GoController extends EasyController
 
     public function onExceptionHandle(\Throwable $e)
     {
-        if ($this->whoopsConfig->isEnable() && Server::$instance->getServerConfig()->isDebug()) {
-            throw $e;
-        }
-
         if ($this->clientData->getResponse() != null) {
             $this->response->withStatus(404);
             $this->response->withHeader("Content-Type", "text/html;charset=UTF-8");
