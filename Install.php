@@ -13,13 +13,13 @@ if (count($argv) < 2 || $argv[1] != '-y') {
         exit();
     }
 }
-copy_dir(__DIR__ . "/examples/src", $path.'/src');
-copy_dir(__DIR__ . "/examples/resources", $path.'/resources');
+mkdir($path . '/src');
+copy_dir(__DIR__ . "/install/resources", $path . '/resources');
 updateComposer();
 createStart();
 
 
-exec("composer dumpautoload",$output);
+exec("composer dump", $output);
 print_r("根目录下 start_server.php 是启动文件，祝君使用愉快。\n");
 exit();
 
@@ -31,10 +31,11 @@ function read()
     $input = chop($input);
     return $input;
 }
+
 function copy_dir($src, $dst, $force = false)
 {
     $dir = opendir($src);
-    if(!$dir) {
+    if (!$dir) {
         print_r("$src 权限问题或目录不合法，安装错误\n");
         return false;
     }
@@ -61,7 +62,8 @@ function copy_dir($src, $dst, $force = false)
     return true;
 }
 
-function createStart(){
+function createStart()
+{
     global $path;
     $cfg = '<?php
 namespace app;
@@ -82,7 +84,7 @@ class Application
     }
 }
 ';
-    file_put_contents($path .'/src/Application.php', $cfg);
+    file_put_contents($path . '/src/Application.php', $cfg);
 
     $cfg = <<<EOF
 <?php
@@ -92,17 +94,18 @@ define("RES_DIR", __DIR__ . "/resources");
 
 app\Application::main();
 EOF;
-    file_put_contents($path .'/start_server.php', $cfg);
+    file_put_contents($path . '/start_server.php', $cfg);
 }
 
-function updateComposer(){
+function updateComposer()
+{
     global $path;
-    if(!$composer = file_get_contents($path .'/composer.json')){
+    if (!$composer = file_get_contents($path . '/composer.json')) {
         exit('composer.json not found');
     }
 
-    $composer = json_decode( $composer,true);
+    $composer = json_decode($composer, true);
     $composer['autoload']['psr-4']['app\\'] = 'src/';
-    file_put_contents($path .'/composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    file_put_contents($path . '/composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 }
 

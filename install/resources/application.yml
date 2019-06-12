@@ -1,0 +1,14 @@
+esd:
+  profiles:
+    active: local
+  server:
+    name: esd-server
+    worker_num: 4
+    max_conn: 1024
+    debug: true
+  port:
+    http:
+      host: 0.0.0.0
+      port: 8080
+      open_http_protocol: true
+      sock_type: 1

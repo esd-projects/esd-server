@@ -28,8 +28,7 @@
     "autoload": {
         "psr-4": {
             "ESD\\": "src/",
-            "ESD\\Examples\\": "examples/src/",
-            "app\\": "src/"
+            "ESD\\Examples\\": "examples/src/"
         }
     },
     "authors": [
