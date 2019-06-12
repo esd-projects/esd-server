@@ -63,14 +63,25 @@ function copy_dir($src, $dst, $force = false)
 
 function createStart(){
     global $path;
-    $cfg = <<<EOF
-<?php
+    $cfg = '<?php
 namespace app;
 use ESD\Go\GoApplication;
-class Application extends GoApplication
+class Application
 {
+    /**
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ESD\Core\Exception
+     * @throws \ESD\Core\Plugins\Config\ConfigException
+     * @throws \ReflectionException
+     */
+    public static function main()
+    {
+        $application = new GoApplication();
+        $application->run();
+    }
 }
-EOF;
+';
     file_put_contents($path .'/src/Application.php', $cfg);
 
     $cfg = <<<EOF
@@ -79,7 +90,7 @@ require __DIR__ . '/vendor/autoload.php';
 define("ROOT_DIR", __DIR__);
 define("RES_DIR", __DIR__ . "/resources");
 
-new app\Application();
+app\Application::main();
 EOF;
     file_put_contents($path .'/start_server.php', $cfg);
 }
