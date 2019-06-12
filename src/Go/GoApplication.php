@@ -16,6 +16,7 @@ use ESD\Core\Server\Process\Process;
 use ESD\Plugins\Actuator\ActuatorPlugin;
 use ESD\Plugins\Aop\AopConfig;
 use ESD\Plugins\Aop\AopPlugin;
+use ESD\Plugins\Aop\OrderAspect;
 use ESD\Plugins\AutoReload\AutoReloadPlugin;
 use ESD\Plugins\Cache\CachePlugin;
 use ESD\Plugins\Console\ConsolePlugin;
@@ -40,16 +41,46 @@ class GoApplication extends Server
     use GetLogger;
 
     /**
+     * @var OrderAspect[]
+     */
+    protected $aspects = [];
+    /**
      * Application constructor.
-     * @throws \DI\DependencyException
      * @throws \ReflectionException
      * @throws \Exception
      */
     public function __construct()
     {
         parent::__construct(new ServerConfig(), GoPort::class, GoProcess::class);
-        $this->addPlug(new ConsolePlugin());
+    }
 
+    /**
+     * 启动
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ESD\Core\Exception
+     * @throws \ESD\Core\Plugins\Config\ConfigException
+     * @throws \ReflectionException
+     * @throws \Exception
+     */
+    public function run()
+    {
+        $this->addNormalPlugs();
+        $this->configure();
+        $this->start();
+    }
+
+    /**
+     * 添加默认插件
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ESD\Core\Exception
+     * @throws \ESD\Core\Plugins\Config\ConfigException
+     * @throws \ReflectionException
+     */
+    protected function addNormalPlugs()
+    {
+        $this->addPlug(new ConsolePlugin());
         $routeConfig = new RouteConfig();
         $routeConfig->setErrorControllerName(GoController::class);
         $this->addPlug(new EasyRoutePlugin($routeConfig));
@@ -72,8 +103,6 @@ class GoApplication extends Server
         //默认添加Go命名空间的aop
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
-        $this->configure();
-        $this->start();
     }
 
     /**
@@ -84,7 +113,6 @@ class GoApplication extends Server
     {
         $this->getPlugManager()->addPlug($plugin);
     }
-
 
     /**
      * 所有的配置插件已初始化好
@@ -118,5 +146,36 @@ class GoApplication extends Server
     public function onManagerStop()
     {
         $this->info("onManagerStop");
+    }
+
+    /**
+     * 插件初始化结束
+     * @return mixed
+     */
+    public function pluginInitialized()
+    {
+        $this->addAspects();
+    }
+
+    /**
+     * 添加AOP切片点
+     * @return mixed
+     */
+    protected function addAspects()
+    {
+        foreach ($this->aspects as $aspect){
+            /** @var AopConfig $aopConfig */
+            $aopConfig = DIGet(AopConfig::class);
+            $aopConfig->addAspect($aspect);
+        }
+    }
+
+    /**
+     * 添加AOP切片点
+     * @param OrderAspect $orderAspect
+     */
+    public function addAspect(OrderAspect $orderAspect)
+    {
+        $this->aspects[] = $orderAspect;
     }
 }
