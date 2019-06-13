@@ -11,7 +11,6 @@ namespace ESD\Go;
 
 use DI\Annotation\Inject;
 use ESD\Core\Server\Beans\Request;
-use ESD\Core\Server\Server;
 use ESD\Go\Exception\AlertResponseException;
 use ESD\Go\Exception\ResponseException;
 use ESD\Plugins\EasyRoute\Controller\EasyController;
@@ -105,14 +104,15 @@ class GoController extends EasyController
 
     public function isAjax(): bool
     {
-        if(strtolower($this->request->getHeaderLine('x-requested-with')) == 'xmlhttprequest'){
+        if (strtolower($this->request->getHeaderLine('x-requested-with')) == 'xmlhttprequest') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function redirect($url, $http_code = 302){
+    public function redirect($url, $http_code = 302)
+    {
         return $this->response->redirect($url, $http_code);
     }
 
@@ -123,23 +123,24 @@ class GoController extends EasyController
      * @param array $header
      * @return string
      */
-    public function successResponse($data, $url = null, $wait = 3, array $header = []){
+    public function successResponse($data, $url = null, $wait = 3, array $header = [])
+    {
 
-        if(is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null){
+        if (is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null) {
             $url = $this->request->getServer(Request::HEADER_REFERER);
-        }else{
+        } else {
             $url = '/';
         }
 
-        if(is_array($data)){
-            if(empty($header)){
+        if (is_array($data)) {
+            if (empty($header)) {
                 $this->response->withHeader('Content-type', 'application/json');
-            }else{
+            } else {
                 $this->response->withHeaders($header);
             }
-            return json_encode(['data' => $data, 'code'=> 0]);
-        }else{
-            if(!empty($header)){
+            return json_encode(['data' => $data, 'code' => 0]);
+        } else {
+            if (!empty($header)) {
                 $this->response->withHeaders($header);
             }
             return $this->msg('系统消息', $data, $wait, $url);
@@ -147,33 +148,35 @@ class GoController extends EasyController
     }
 
 
-    public function errorResponse($msg = '', $code = 500, $url = null, $wait = 3, array $header = []){
+    public function errorResponse($msg = '', $code = 500, $url = null, $wait = 3, array $header = [])
+    {
 
-        if(is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null){
+        if (is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null) {
             $url = $$this->request->getServer(Request::HEADER_REFERER);
-        }else{
+        } else {
             $url = '/';
         }
 
-        if($this->isAjax()){
-            if(empty($header)){
+        if ($this->isAjax()) {
+            if (empty($header)) {
                 $this->response->withHeader('Content-type', 'application/json');
-            }else{
+            } else {
                 $this->response->withHeaders($header);
             }
-            return json_encode(['code'=> $code, 'msg' => $msg, 'data' => null]);
-        }else{
-            if(!empty($header)){
+            return json_encode(['code' => $code, 'msg' => $msg, 'data' => null]);
+        } else {
+            if (!empty($header)) {
                 $this->response->withHeaders($header);
             }
             return $this->msg('错误消息', $msg, $wait, $url);
         }
     }
 
-    private function msg($title = '系统消息',$info, $wait, $url){
-        return '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head>'.
-            '<meta http-equiv="Refresh" content="'.$wait.'; url='.$url.'"/><body><h1>'.$title.'</h1>'.
-            '<h2>'.$info.'</h2></body></html>';
+    private function msg($title = '系统消息', $info, $wait, $url)
+    {
+        return '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head>' .
+            '<meta http-equiv="Refresh" content="' . $wait . '; url=' . $url . '"/><body><h1>' . $title . '</h1>' .
+            '<h2>' . $info . '</h2></body></html>';
     }
 
 
@@ -182,18 +185,18 @@ class GoController extends EasyController
         if ($this->clientData->getResponse() != null) {
             $this->response->withStatus(404);
             $this->response->withHeader("Content-Type", "text/html;charset=UTF-8");
-            if($e instanceof RouteException) {
+            if ($e instanceof RouteException) {
                 $msg = '404 Not found / ' . $e->getMessage();
                 return $msg;
 
-            }else if ($e instanceof AccessDeniedException) {
+            } else if ($e instanceof AccessDeniedException) {
                 $this->response->withStatus(401);
                 $msg = '401 Access denied / ' . $e->getMessage();
                 return $msg;
-            }else if($e instanceof ResponseException){
+            } else if ($e instanceof ResponseException) {
                 $this->response->withStatus(200);
                 return $this->errorResponse($e->getMessage(), $e->getCode());
-            }else if ($e instanceof AlertResponseException){
+            } else if ($e instanceof AlertResponseException) {
                 $this->response->withStatus(500);
                 return $this->errorResponse($e->getMessage(), $e->getCode());
             }

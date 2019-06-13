@@ -16,4 +16,5 @@ esd:
       host: 0.0.0.0
       port: 8081
       open_websocket_protocol: true
+      pack_tool: ESD\Plugins\Pack\PackTool\NonJsonPack
       sock_type: 1

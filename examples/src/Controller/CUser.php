@@ -5,9 +5,11 @@
  * Date: 2019/5/7
  * Time: 10:48
  */
+
 namespace ESD\Examples\Controller;
 
 use DI\Annotation\Inject;
+use ESD\Core\Exception;
 use ESD\Examples\Model\User;
 use ESD\Examples\Service\UserService;
 use ESD\Plugins\Cache\Annotation\CacheEvict;
@@ -15,14 +17,13 @@ use ESD\Plugins\EasyRoute\Annotation\GetMapping;
 use ESD\Plugins\EasyRoute\Annotation\ModelAttribute;
 use ESD\Plugins\EasyRoute\Annotation\PostMapping;
 use ESD\Plugins\EasyRoute\Annotation\RequestBody;
-use ESD\Plugins\EasyRoute\Annotation\RequestFormData;
 use ESD\Plugins\EasyRoute\Annotation\RequestRawJson;
 use ESD\Plugins\EasyRoute\Annotation\RestController;
+use ESD\Plugins\Mysql\MysqlException;
 use ESD\Plugins\Security\Annotation\PreAuthorize;
 use ESD\Plugins\Security\Beans\Principal;
-use ESD\Core\Exception;
 use ESD\Plugins\Validate\ValidationException;
-use ESD\Plugins\Mysql\MysqlException;
+
 /**
  * @RestController("user")
  * Class CUser
@@ -42,7 +43,7 @@ class CUser extends Base
      */
     public function login()
     {
-        $this->response->withAddedHeader('content-type','text/html; charset=utf-8');
+        $this->response->withAddedHeader('content-type', 'text/html; charset=utf-8');
         $principal = new Principal();
         $principal->addRole("user");
         $principal->setUsername("user");
@@ -63,7 +64,7 @@ class CUser extends Base
      */
     public function logout()
     {
-        $this->response->withAddedHeader('content-type','text/html; charset=utf-8');
+        $this->response->withAddedHeader('content-type', 'text/html; charset=utf-8');
         $this->session->invalidate();
         return "注销";
     }
@@ -119,10 +120,10 @@ class CUser extends Base
      * @throws ValidationException]
      * @return User|null
      */
-    public function updateUser2($data){
+    public function updateUser2($data)
+    {
         return $this->userService->updateUser(new User($data));
     }
-
 
 
     /**
@@ -135,15 +136,11 @@ class CUser extends Base
      * @throws MysqlException
      * @throws ValidationException
      */
-    public function updateUser3(User $user){
+    public function updateUser3(User $user)
+    {
         $user->updateSelective();
         return $user::select($user->id);
     }
-
-    public function defaultMethod($methodName){
-        return 'default method' . $methodName;
-    }
-
 
     /**
      * @PostMapping("insertUser")
