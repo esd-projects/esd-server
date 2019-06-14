@@ -1,5 +1,12 @@
 #  EasySwooleDistributed
 
+
+[![Latest Version](https://img.shields.io/badge/version-v2.0.1-green.svg?maxAge=2592000)](https://github.com/esd-projects/esd-server/releases)
+[![Php Version](https://img.shields.io/badge/php-%3E=7.1-brightgreen.svg?maxAge=2592000)](https://secure.php.net/)
+[![Swoole Version](https://img.shields.io/badge/swoole-%3E=4.3.3-brightgreen.svg?maxAge=2592000)](https://github.com/swoole/swoole-src)
+[![ESD Doc](https://img.shields.io/badge/docs-passing-green.svg?maxAge=2592000)](https://www.kancloud.cn/tmtbe/goswoole/1067764)
+[![ESD License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://github.com/esd-projects/esd-server/blob/master/LICENSE)
+
 **简单，易用，高性能，高扩展性，拥有强大的插件管理和丰富的插件系统，高颜值的PHP协程框架，简称ESD。**
 
 由SwooleDistributed与EasySwoole合作打造最棒的swoole框架。
