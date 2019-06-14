@@ -127,3 +127,32 @@ docker run -it --rm -p 8080:8080 -v $PWD:/data registry.cn-beijing.aliyuncs.com/
 请在 ESD 根目录运行容器，否则修改$PWD为代码根路径（windows需要用%cd%替换$PWD），如果修改了端口请把8080 修改为自己使用的端口.
 镜像启动后的目录即挂载到主机的代码目录，注意 Mac 系统无法使用 inotify 热加载功能。
 容器启动后按照安装步骤，运行框架。
+
+## 🍭 性能测试
+ 4核8G SSD盘 腾讯云高IO型I2服务器压测,框架压测包含路由
+ 
+worker_num = 4
+
+swoole  ab压测输出hello 平均 5.9QPS万 
+
+ESD框架 ab压测输出hello 平均 3.6QPS万 
+
+SD框架  ab压测输出hello 平均 1.3QPS万 
+
+压测数据来自：A-Smile
+
+## 🖊️ 如何贡献
+
+非常欢迎您对ESD的开发作出贡献！
+
+你可以选择以下方式向ESD贡献：
+
+- [发布issue进行问题反馈和建议](https://github.com/esd-projects/esd-server/issues)
+- 通过Pull Request提交修复
+- 完善我们的文档和例子
+- 提供更多的插件
+
+
+## 📃 开源协议
+
+Apache License Version 2.0 see http://www.apache.org/licenses/LICENSE-2.0.html
