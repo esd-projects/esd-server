@@ -71,7 +71,7 @@ $this->addAspect(new MyAspect);
 public function aroundTransactional(MethodInvocation $invocation)
 ```
 
-## Tracing 链路追踪
+## ⚡️ Tracing 链路追踪
 通过加载Tracing插件可以实现服务链路性能的监控,支持微服务
 ![](./screenshots/tracing.png)
 ## ⚡️ 分布式与微服务
