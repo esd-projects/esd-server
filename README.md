@@ -1,4 +1,5 @@
-#  EasySwoole Distributed 的由来
+#  EasySwoole Distributed
+======
 
 本项目由 SwooleDistributed 项目与 EasySwoole 项目共同发起。
 
