@@ -106,3 +106,21 @@ https://github.com/esd-cloud
 * saber-cloud-plugin https://github.com/esd-projects/saber-cloud-plugin 声明试Web客户端，提供微服务访问
 * circuitbreaker-plugin https://github.com/esd-projects/circuitbreaker-plugin 微服务的熔断器插件
 * consul-plugin-plugin https://github.com/esd-projects/consul-plugin consul插件，提供服务注册，选举
+
+## Docker运行环境(由anythink提供)
+```
+➜ docker run -it --rm -p 8080:8080 -v $PWD:/data registry.cn-beijing.aliyuncs.com/anythink/esd:latest
+ _____ ____  ____    ____              _   _
+| ____/ ___||  _ \  |  _ \ _   _ _ __ | |_(_)_ __ ___   ___
+|  _| \___ \| | | | | |_) | | | | '_ \| __| | '_ ` _ \ / _ \
+| |___ ___) | |_| | |  _ <| |_| | | | | |_| | | | | | |  __/
+|_____|____/|____/  |_| \_\\__,_|_| |_|\__|_|_| |_| |_|\___|
+ESD framework Runtime Environment
+version 1.5 author by anythink
+root@f41132062911:/data# 
+```
+docker run -it --rm -p 8080:8080 -v $PWD:/data registry.cn-beijing.aliyuncs.com/anythink/esd:latest
+
+请在 ESD 根目录运行容器，否则修改$PWD为代码根路径（windows需要用%cd%替换$PWD），如果修改了端口请把8080 修改为自己使用的端口.
+镜像启动后的目录即挂载到主机的代码目录，注意 Mac 系统无法使用 inotify 热加载功能。
+容器启动后按照安装步骤，运行框架。
