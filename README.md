@@ -1,7 +1,7 @@
 #  EasySwooleDistributed
 
 
-[![Latest Version](https://img.shields.io/github/release/esd-projects/esd-server.svg?style=plastic)](https://github.com/esd-projects/esd-server/releases)
+[![Latest Version](https://img.shields.io/github/release/esd-projects/esd-server.svg)](https://github.com/esd-projects/esd-server/releases)
 [![Php Version](https://img.shields.io/badge/php-%3E=7.1-brightgreen.svg?maxAge=2592000)](https://secure.php.net/)
 [![Swoole Version](https://img.shields.io/badge/swoole-%3E=4.3.3-brightgreen.svg?maxAge=2592000)](https://github.com/swoole/swoole-src)
 [![ESD Doc](https://img.shields.io/badge/docs-passing-green.svg?maxAge=2592000)](https://www.kancloud.cn/tmtbe/goswoole/1067764)
