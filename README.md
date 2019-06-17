@@ -114,6 +114,7 @@ https://github.com/esd-cloud
 * csvreader-plugin https://github.com/esd-projects/csvreader-plugin 读取解析csv的插件
 * process-rpc-plugin https://github.com/esd-projects/process-rpc-plugin 进程通讯插件
 * actor-plugin https://github.com/esd-projects/actor-plugin acotr插件
+* wechat-plugin https://github.com/esd-projects/wechat-plugin wechat插件，由lphkxd提供
 * saber-cloud-plugin https://github.com/esd-projects/saber-cloud-plugin 声明试Web客户端，提供微服务访问
 * circuitbreaker-plugin https://github.com/esd-projects/circuitbreaker-plugin 微服务的熔断器插件
 * consul-plugin-plugin https://github.com/esd-projects/consul-plugin consul插件，提供服务注册，选举
