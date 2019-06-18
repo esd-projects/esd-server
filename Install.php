@@ -80,6 +80,11 @@ class Application
     public static function main()
     {
         GoApplication::runApp(Application::class);
+        //如果要添加插件和切片使用下面的代码启动
+        /* $goApp = new GoApplication();
+         $goApp->addPlug(new EasyRoutePlugin());
+         $goApp->addAspect(new RouteAspect());
+         $goApp->run(Application::class);*/
     }
 }
 ';
