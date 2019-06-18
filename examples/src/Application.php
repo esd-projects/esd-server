@@ -9,6 +9,8 @@
 namespace ESD\Examples;
 
 use ESD\Go\GoApplication;
+use ESD\Plugins\EasyRoute\Filter\CorsFilter;
+use ESD\Plugins\EasyRoute\Filter\FilterManager;
 
 class Application
 {
@@ -22,6 +24,15 @@ class Application
     public static function main()
     {
         $application = new GoApplication();
-        $application->run();
+        $application->run(Application::class);
+    }
+
+    /**
+     * Application constructor.
+     * @param FilterManager $filterManager
+     */
+    public function __construct(FilterManager $filterManager)
+    {
+        $filterManager->addFilter(new CorsFilter());
     }
 }

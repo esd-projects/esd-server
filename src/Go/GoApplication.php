@@ -56,17 +56,18 @@ class GoApplication extends Server
 
     /**
      * 启动
+     * @param $mainClass
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ESD\Core\Exception
      * @throws \ESD\Core\Plugins\Config\ConfigException
      * @throws \ReflectionException
-     * @throws \Exception
      */
-    public function run()
+    public function run($mainClass)
     {
         $this->addNormalPlugs();
         $this->configure();
+        $this->getContainer()->get($mainClass);
         $this->start();
     }
 
