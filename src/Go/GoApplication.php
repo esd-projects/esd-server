@@ -179,4 +179,10 @@ class GoApplication extends Server
     {
         $this->aspects[] = $orderAspect;
     }
+
+    public static function runApp($primarySource)
+    {
+        $app = new GoApplication();
+        $app->run($primarySource);
+    }
 }

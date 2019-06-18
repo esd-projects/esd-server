@@ -79,8 +79,7 @@ class Application
      */
     public static function main()
     {
-        $application = new GoApplication();
-        $application->run();
+        GoApplication::runApp(Application::class);
     }
 }
 ';

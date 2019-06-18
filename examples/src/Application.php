@@ -15,16 +15,11 @@ use ESD\Plugins\EasyRoute\Filter\FilterManager;
 class Application
 {
     /**
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ESD\Core\Exception
-     * @throws \ESD\Core\Plugins\Config\ConfigException
-     * @throws \ReflectionException
+     * main
      */
     public static function main()
     {
-        $application = new GoApplication();
-        $application->run(Application::class);
+        GoApplication::runApp(Application::class);
     }
 
     /**
