@@ -26,3 +26,8 @@ mysql:
 redis:
   default:
     host: 'redis-master.dev.svc.cluster.local'
+
+blade:
+  namespace:
+    app:
+      path: ${ROOT_DIR}/examples/src/Views

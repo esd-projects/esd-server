@@ -20,7 +20,7 @@
         "esd/process-rpc-plugin": "~0.1",
         "esd/uid-plugin": "~0.1",
         "esd/topic-plugin": "~0.1",
-        "esd/csvreader-plugin": "~0.1"
+        "esd/blade-plugin": "~0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"

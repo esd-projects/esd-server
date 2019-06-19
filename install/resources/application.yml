@@ -1,4 +1,6 @@
 esd:
+  logger:
+    level: INFO
   profiles:
     active: local
   server:

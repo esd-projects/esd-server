@@ -1,2 +1,6 @@
 reload:
   enable: true
+blade:
+  namespace:
+    app:
+      path: ${ROOT_DIR}/src/Views

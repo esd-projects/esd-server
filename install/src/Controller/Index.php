@@ -1,9 +1,9 @@
 <?php
-namespace ESD\Examples\Controller;
-use DI\Annotation\Inject;
-use ESD\Plugins\Blade\Blade;
+namespace App\Controller;
 use ESD\Plugins\EasyRoute\Annotation\GetMapping;
 use ESD\Plugins\EasyRoute\Annotation\RestController;
+use DI\Annotation\Inject;
+use ESD\Plugins\Blade\Blade;
 
 /**
  * @RestController()

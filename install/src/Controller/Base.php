@@ -1,5 +1,5 @@
 <?php
-namespace ESD\Examples\Controller;
+namespace App\Controller;
 
 use ESD\Go\GoController;
 use ESD\Plugins\AnnotationsScan\Annotation\Component;

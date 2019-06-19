@@ -13,10 +13,10 @@ if (count($argv) < 2 || $argv[1] != '-y') {
         exit();
     }
 }
-mkdir($path . '/src');
 copy_dir(__DIR__ . "/install/resources", $path . '/resources');
+copy_dir(__DIR__ . "/install/src", $path . '/src');
+copy(__DIR__ . '/install/start_server.php', $path . '/start_server.php');
 updateComposer();
-createStart();
 
 
 exec("composer dump", $output);
@@ -51,54 +51,12 @@ function copy_dir($src, $dst, $force = false)
                 continue;
             } else {
                 copy($src . '/' . $file, $dst . '/' . $file);
-                $content = file_get_contents($dst . '/' . $file);
-                $content = str_replace('namespace ESD\Examples', 'namespace app', $content);
-                file_put_contents($dst . '/' . $file, $content);
             }
         }
     }
     closedir($dir);
     print_r("已创建$dst 目录\n");
     return true;
-}
-
-function createStart()
-{
-    global $path;
-    $cfg = '<?php
-namespace app;
-use ESD\Go\GoApplication;
-class Application
-{
-    /**
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ESD\Core\Exception
-     * @throws \ESD\Core\Plugins\Config\ConfigException
-     * @throws \ReflectionException
-     */
-    public static function main()
-    {
-        GoApplication::runApp(Application::class);
-        //如果要添加插件和切片使用下面的代码启动
-        /* $goApp = new GoApplication();
-         $goApp->addPlug(new EasyRoutePlugin());
-         $goApp->addAspect(new RouteAspect());
-         $goApp->run(Application::class);*/
-    }
-}
-';
-    file_put_contents($path . '/src/Application.php', $cfg);
-
-    $cfg = <<<EOF
-<?php
-require __DIR__ . '/vendor/autoload.php';
-define("ROOT_DIR", __DIR__);
-define("RES_DIR", __DIR__ . "/resources");
-
-app\Application::main();
-EOF;
-    file_put_contents($path . '/start_server.php', $cfg);
 }
 
 function updateComposer()
@@ -109,7 +67,7 @@ function updateComposer()
     }
 
     $composer = json_decode($composer, true);
-    $composer['autoload']['psr-4']['app\\'] = 'src/';
+    $composer['autoload']['psr-4']['App\\'] = 'src/';
     file_put_contents($path . '/composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 }
 

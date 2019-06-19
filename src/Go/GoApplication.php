@@ -18,6 +18,7 @@ use ESD\Plugins\Aop\AopConfig;
 use ESD\Plugins\Aop\AopPlugin;
 use ESD\Plugins\Aop\OrderAspect;
 use ESD\Plugins\AutoReload\AutoReloadPlugin;
+use ESD\Plugins\Blade\BladePlugin;
 use ESD\Plugins\Cache\CachePlugin;
 use ESD\Plugins\Console\ConsolePlugin;
 use ESD\Plugins\CsvReader\CsvReaderPlugin;
@@ -100,7 +101,7 @@ class GoApplication extends Server
         $this->addPlug(new ProcessRPCPlugin());
         $this->addPlug(new UidPlugin());
         $this->addPlug(new TopicPlugin());
-        $this->addPlug(new CsvReaderPlugin());
+        $this->addPlug(new BladePlugin());
         //默认添加Go命名空间的aop
         $aopConfig = new AopConfig(__DIR__);
         $aopConfig->merge();
