@@ -15,6 +15,7 @@ if (count($argv) < 2 || $argv[1] != '-y') {
 }
 copy_dir(__DIR__ . "/install/resources", $path . '/resources');
 copy_dir(__DIR__ . "/install/src", $path . '/src');
+copy_dir(__DIR__ . "/install/docker", $path . '/docker');
 copy(__DIR__ . '/install/start_server.php', $path . '/start_server.php');
 updateComposer();
 

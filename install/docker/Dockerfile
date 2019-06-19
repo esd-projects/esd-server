@@ -1,10 +1,9 @@
 FROM anythink1/esd:latest
-MAINTAINER anythink
+MAINTAINER ESD
 
-ENV ESD_ENV deploy
 COPY ./ /data
 
-EXPOSE 8080
+EXPOSE 80
 WORKDIR /data
 
 ENTRYPOINT ["/usr/local/bin/php", "start_server.php", "start"]
