@@ -128,8 +128,6 @@ class GoController extends EasyController
 
         if (is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null) {
             $url = $this->request->getServer(Request::HEADER_REFERER);
-        } else {
-            $url = '/';
         }
 
         if (is_array($data)) {
@@ -152,9 +150,7 @@ class GoController extends EasyController
     {
 
         if (is_null($url) && $this->request->getServer(Request::HEADER_REFERER) != null) {
-            $url = $$this->request->getServer(Request::HEADER_REFERER);
-        } else {
-            $url = '/';
+            $url = $this->request->getServer(Request::HEADER_REFERER);
         }
 
         if ($this->isAjax()) {
