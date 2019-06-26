@@ -119,6 +119,7 @@ https://github.com/esd-cloud
 * saber-cloud-plugin https://github.com/esd-projects/saber-cloud-plugin 声明试Web客户端，提供微服务访问
 * circuitbreaker-plugin https://github.com/esd-projects/circuitbreaker-plugin 微服务的熔断器插件
 * consul-plugin-plugin https://github.com/esd-projects/consul-plugin consul插件，提供服务注册，选举
+* hashed-wheel-timer-plugin https://github.com/esd-projects/hashed-wheel-timer-plugin 提供延迟队列，由anyhink提供
 
 ## Docker运行环境(由anythink提供)
 ```
