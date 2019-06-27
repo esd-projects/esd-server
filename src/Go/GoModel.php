@@ -147,7 +147,7 @@ abstract class GoModel implements TracingInterface
                 $key = $reflectionProperty->name;
                 $value = $this->$key;
                 if (is_array($value) || is_object($value)) continue;
-                if ($ignoreNull && $value == null) continue;
+                if ($ignoreNull && $value === null) continue;
                 if ($changeConnectStyle) {
                     $array[$this->changeConnectStyle($key)] = $value;
                 } else {
